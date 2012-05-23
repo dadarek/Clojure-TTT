@@ -1,4 +1,2 @@
-(ns Clojure-TTT.minimax)
+(ns clojure_ttt.minimax)
 
-(defn calculate
-  [] 3)

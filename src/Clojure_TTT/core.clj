@@ -1,4 +1,4 @@
-(ns Clojure-TTT.core)
+(ns clojure_ttt.core)
 
 (defn -main []
   (println "hi")
