@@ -14,17 +14,21 @@
     (should (winner? #{3 5 7}))
   )
 
-  (it "ignores order"
+  (it "ignores their ordering"
     (should (winner? #{2 3 1})))
 
-  (it "should NOT treat [3 4 5] as winner"
-    (should-not (winner? #{3 4 5})))
+  (it "ignores extraneous squares"
+    (should (winner? #{1 2 3 4}))
+    (should (winner? #{3 4 5 6}))
+  )
 
-  (it "should treat [4 5 6] as winner"
-    (should (winner? #{4 5 6})))
-
-  (it "should treat [1 2 3 4] as winner"
-    (should (winner? #{1 2 3 4})))
+  (it "doesn't simply return true for everything"
+    (should-not (winner? #{}))
+    (should-not (winner? #{3}))
+    (should-not (winner? #{8 9}))
+    (should-not (winner? #{3 8 9}))
+    (should-not (winner? #{1 3 5 8}))
+  )
 )
 
 (run-specs)
