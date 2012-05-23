@@ -12,7 +12,7 @@
                             0  0  0)]
       (should=
         expected-values
-        (value-each-square board))))
+        (value-each-square :x board))))
 
   (it "Scores winning square as 1"
     (let [board           '(:x :o :x
@@ -23,7 +23,7 @@
                             0  0  1)]
       (should=
         expected-values
-        (value-each-square board))))
+        (value-each-square :x board))))
 
   (it "Scores tie square as 0"
     (let [board         '( :x :o :x
@@ -34,7 +34,7 @@
                             0  0  0)]
       (should=
         expected-values
-        (value-each-square board))))
+        (value-each-square :x board))))
 )
 
 (run-specs)
