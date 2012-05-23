@@ -1,8 +1,6 @@
 (ns clojure_ttt.minimax-spec
+  (:use [clojure_ttt.core])
   (:use [speclj.core]))
-
-(defn equal-5? [n]
-  (= 5 n))
 
 (describe "Understanding speclj"
   (before-all 
