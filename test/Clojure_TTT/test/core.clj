@@ -3,5 +3,5 @@
   (:use [clojure.test]))
 
 (deftest first-test
-  (is (= (+ 7 2) (+ 2 1)) 
-      "Should be something?"))
+  (is (= 3 (my-fun)))
+         )
