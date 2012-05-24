@@ -58,9 +58,17 @@
         (should= -1 (sum-of-children 8 context))
       )
     )
+    (it "Returns 0 when opponent ties on move after"
+      (let [context { :player :o
+                      :board '(:o :x :x
+                               :x :o :o
+                               :x nil nil)}]
+        (should= 0 (sum-of-children 8 context))
+      )
+    )
   )
 
-  ; TODO: Move this out into board utils or something
+  ;TODO: Move this into utils
   (context "Player squares"
     (it "finds player x squares"
       (should= #{1 2 8} (player-squares '(:x :x nil
@@ -73,6 +81,32 @@
                                         nil :o nil
                                         nil :x :o)
                                        :o))
+    )
+  )
+
+  ;TODO: Move this into utils
+  (context "Taking squares"
+    (it "Appends player to board on correct square"
+      (let [context { :player :x
+                      :board '(:o :x nil
+                               :x :o nil
+                               :x :o nil)}
+            expected-board   '(:o :x :x
+                               :x :o nil
+                               :x :o nil)]
+        (should= expected-board (take-square 3 context))
+      )
+    )
+    (it "Takes into consideration both players"
+      (let [context { :player :o
+                      :board '(:o :x :x
+                               :x :o nil
+                               :x :o nil)}
+            expected-board   '(:o :x :x
+                               :x :o :o
+                               :x :o nil)]
+        (should= expected-board (take-square 6 context))
+      )
     )
   )
 )
