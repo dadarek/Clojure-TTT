@@ -24,17 +24,6 @@
       (should=
         expected-values
         (value-each-square :x board))))
-
-  (it "Scores tie square as 0"
-    (let [board         '( :x :o :x
-                          nil :x :o
-                           :o :x :o)
-          expected-values '(0  0  0
-                            0  0  0
-                            0  0  0)]
-      (should=
-        expected-values
-        (value-each-square :x board))))
 )
 
 (run-specs)
