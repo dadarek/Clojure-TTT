@@ -57,6 +57,18 @@
       (should= :x (:player (next-context nil {:player :o})))
       (should= :o (:player (next-context nil {:player :x})))
     )
+
+    (it "Updates the board"
+      (let [old-board '(:x  :o  :x
+                        nil nil nil
+                        nil nil nil)
+            new-board '(:x  :o  :x
+                        nil :o  nil
+                        nil nil nil)
+            context {:player :o :board old-board}]
+        (should= new-board (:board (next-context 5 context)))
+      )
+    )
   )
 )
 

@@ -17,7 +17,11 @@
 )
 
 (defn next-context [square context]
-  {:player (if (= :x (:player context)) :o :x)}
+  (let [next-player (if (= :x (:player context)) :o :x)]
+    {:player next-player :board '(:x  :o :x
+                                  nil :o  nil
+                                  nil nil nil)}
+  )
 )
 
 ; TODO: Dump any utility functions that aren't being used
