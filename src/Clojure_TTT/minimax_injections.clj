@@ -1,46 +1,8 @@
 (ns clojure_ttt.minimax_injections
   (:use clojure.set)
-  (:use clojure_ttt.rules))
+  (:use clojure_ttt.rules)
+  (:use clojure_ttt.board_utilities))
 
-
-;TODO: Move this into utils
-(defn player-squares [board player]
-  ( let [owns? #(= player (nth board %))
-         not-nil? #(not= nil %)
-         index-squares #(if (owns? %) (inc %))]
-    (set
-      (filter not-nil?
-        (map index-squares (range 0 9))
-      )
-    )
-  )
-)
-
-;TODO: Move this into utils
-(defn replace-in-list [l index new-value]
-  (concat
-    (take index l)
-    (list new-value)
-    (nthnext l (inc index)))
-)
-
-;TODO: Move this into utils
-(defn take-square [square context]
-  (replace-in-list (:board context) (dec square) (:player context))
-)
-
-;TODO: Move this into utils
-(defn get-empty-squares [board]
-  ( let [empty-square? #(nil? (nth board %))
-         not-nil? #(not= nil %)
-         index-squares #(if (empty-square? %) (inc %))]
-    (set
-      (filter not-nil?
-        (map index-squares (range 0 9))
-      )
-    )
-  )
-)
 
 (defn wins? [square context]
   (winner? (conj (player-squares
@@ -60,6 +22,6 @@
         new-board (#(take-square square context))
         new-context {:player next-player
                      :board new-board} ]
-  -1
-  )
+  (reduce + (map #(sum-of-children % new-context) empty-squares)))
+  ; this has to get injected back into minimax
 )
