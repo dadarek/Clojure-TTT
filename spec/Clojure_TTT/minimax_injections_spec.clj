@@ -4,7 +4,7 @@
 
 (describe "Minimax Injections"
   (context "Wins"
-    (it "Recognizes winning move (row 1)."
+    (it "Recognizes winning moves."
       (let [context { :player :x
                       :board '(:x :x nil
                                :o :o nil
@@ -18,6 +18,14 @@
                                :o :x nil
                                nil nil nil)}]
         (should-not (wins? 3 context))
+      )
+    )
+    (it "Works on both players."
+      (let [context { :player :o
+                      :board '(:x :o nil
+                               :o :x nil
+                               nil nil nil)}]
+        (should-not (wins? 7 context))
       )
     )
   )
