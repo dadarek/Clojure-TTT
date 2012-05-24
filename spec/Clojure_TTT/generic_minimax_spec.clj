@@ -4,44 +4,31 @@
 
 (describe "Generic Minimax"
   (it "Returns 0 on moves that tie"
-    (should= '(0 0 0) (score
-                        #{0 1 2}
-                        nil
+    (should= '(0 0 0) (score #{0 1 2} nil
                         (fn [move context] false)
                         (fn [move context] true)
-                        nil
-      )
+                        nil)
     )
   )
   (it "Returns 1 for moves that win"
-    (should= '(1 1 1) (score
-                        #{0 1 2}
-                        nil
+    (should= '(1 1 1) (score #{0 1 2} nil
                         (fn [move context] true)
                         nil
-                        nil
-      )
+                        nil)
     )
   )
   (it "Returns sum of children for moves that don't win or tie"
-    (should= '(2 2 2) (score
-                        #{0 1 2}
-                        nil
+    (should= '(2 2 2) (score #{0 1 2} nil
                         (fn [move context] false)
                         (fn [move context] false)
-                        (fn [move context] 2)
-      )
+                        (fn [move context] 2))
     )
   )
-  (it "Passes context to injected functions"
-    (should= '(3)
-              (score
-                [0]
-                :context
+  (it "Passes context back to the injected functions"
+    (should= '(3) (score [0] :context
                 (fn [move context] (should= :context context) false)
                 (fn [move context] (should= :context context) false)
-                (fn [move context] (should= :context context) 3)
-      )
+                (fn [move context] (should= :context context) 3))
     )
   )
 )
