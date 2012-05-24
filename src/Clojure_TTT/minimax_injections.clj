@@ -23,5 +23,7 @@
 )
 
 (defn ties? [square context]
-  (= 1 (count (filter nil? (:board context))))
+  (let [squares-left (#(count (filter nil? (:board context))))]
+    (= 1 squares-left)
+  )
 )
