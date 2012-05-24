@@ -3,8 +3,15 @@
   (:use [speclj.core]))
 
 (describe "Minimax Injections"
-  (it "Compiles"
-    (should= 5 (won?))
+  (context "Wins"
+    (it "Knows when it wins"
+      (let [context { :player :x
+                      :board '(:x :x nil
+                               :o :o nil
+                               nil nil nil)}]
+        (should (wins? 3 context))
+      )
+    )
   )
 )
 

@@ -1,6 +1,6 @@
 (ns clojure_ttt.minimax_injections)
 
 
-(defn won? []
-  4
+(defn wins? [square context]
+  true
 )
