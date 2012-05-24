@@ -21,7 +21,8 @@
   (concat
     (take index l)
     (list new-value)
-    (nthnext l (inc index))))
+    (nthnext l (inc index)))
+)
 
 ;TODO: Move this into utils
 (defn take-square [square context]
