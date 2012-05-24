@@ -20,9 +20,9 @@
   )
 
   (it "Sums scores of immediate child moves"
-    (let [wins (fn [move context] (= :context context))
+    (let [wins (fn [move context] (= :first-context context))
           ties (fn [move context] false)
-          next-context (fn [move context] :context)]
+          next-context (fn [move context] :first-context)]
       (should= '(1 1)
                (score #{0 1} nil wins ties next-context))
     )
