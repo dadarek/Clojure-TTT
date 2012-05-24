@@ -30,23 +30,22 @@
     )
   )
 
-  ;TODO: dump this
+  ;TODO: dump this after you stop calling sum-of-children
   (it "Returns sum of children for moves that don't win or tie"
-    (should= '(2 2 2) (score #{0 1 2} nil
-                        (fn [move context] false)
-                        (fn [move context] false)
-                        (fn [move context] 2)
-                        (fn [move context] context))
+    (dorun (score #{0 1 2} nil
+              (fn [move context] false)
+              (fn [move context] false)
+              (fn [move context] 2)
+              (fn [move context] context))
     )
   )
 
   (it "Passes context back to the injected functions"
-    ; maybe use should-not-throw here to force evaluation?
-    (should= '(3) (score [0] :context
-                (fn [move context] (should= :context context) false)
-                (fn [move context] (should= :context context) false)
-                (fn [move context] (should= :context context) 3)
-                (fn [move context] (should= :context context) context))
+    (dorun (score [0] :context
+              (fn [move context] (should= :context context) false)
+              (fn [move context] (should= :context context) false)
+              (fn [move context] (should= :context context) 3)
+              (fn [move context] (should= :context context) context))
     )
   )
 )
