@@ -20,7 +20,7 @@
                 #{0 1 2}
                 :context
                 (fn [move context] true)
-                (fn [move context] false)
+                nil
                 nil
       )
     )
@@ -33,6 +33,18 @@
                 (fn [move context] false)
                 (fn [move context] false)
                 (fn [move context] 2)
+      )
+    )
+  )
+  (it "Passes context to injected functions"
+      ; force this without an external should
+    (should= '(3 3 3)
+              (score
+                #{0 1 2}
+                :context
+                (fn [move context] (should= :context context) false)
+                (fn [move context] (should= :context context) false)
+                (fn [move context] (should= :context context) 3)
       )
     )
   )

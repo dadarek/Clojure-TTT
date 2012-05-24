@@ -4,9 +4,9 @@
 (defn score [moves context wins? ties? sum_of_children]
   (map
     (fn [move]
-      (if (wins? move :a) 1
-        (if (ties? move :a) 0
-          (sum_of_children move :a)
+      (if (wins? move context) 1
+        (if (ties? move context) 0
+          (sum_of_children move context)
         )
       )
     )
