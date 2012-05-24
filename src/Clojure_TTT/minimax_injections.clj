@@ -2,5 +2,5 @@
 
 
 (defn wins? [square context]
-  true
+  (= 3 square)
 )
