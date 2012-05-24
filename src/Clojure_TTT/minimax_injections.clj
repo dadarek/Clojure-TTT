@@ -24,6 +24,5 @@
 
 (defn ties? [square context]
   (let [squares-left (#(count (filter nil? (:board context))))]
-    (= 1 squares-left)
-  )
+    (= 1 squares-left))
 )
