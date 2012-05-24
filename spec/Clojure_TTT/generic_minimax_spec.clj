@@ -16,30 +16,26 @@
     )
   )
   (it "Returns 1 for moves that win"
-    (let [board '(0 1 0)]
-      (should= '(1 1 1)
-                (score
-                  #{0 1 2}
-                  board
-                  nil
-                  (fn [move b player] true)
-                  (fn [move b player] false)
-                  nil
-        )
+    (should= '(1 1 1)
+              (score
+                #{0 1 2}
+                nil
+                nil
+                (fn [move board player] true)
+                (fn [move board player] false)
+                nil
       )
     )
   )
   (it "Returns sum of children moves that don't win or tie"
-    (let [board '(0 1 0)]
-      (should= '(2 2 2)
-                (score
-                  #{0 1 2}
-                  board
-                  nil
-                  (fn [move b player] false)
-                  (fn [move b player] false)
-                  (fn [move b player] 2)
-        )
+    (should= '(2 2 2)
+              (score
+                #{0 1 2}
+                nil
+                nil
+                (fn [move board player] false)
+                (fn [move board player] false)
+                (fn [move board player] 2)
       )
     )
   )
