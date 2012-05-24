@@ -23,9 +23,21 @@
     (should= '(1 1)
              (score #{0 1} nil
                 (fn [move context]
-                  (if (= :context context) 1))
+                  (= :context context))
                 (fn [move context] false)
                 (fn [move context] :context))
+    )
+  )
+
+  (it "Sums scores of all grandchildren moves"
+    (should= '(2 2 2)
+             (score #{0 1 2} nil
+                (fn [move context]
+                  (= :second-context context))
+                (fn [move context] false)
+                (fn [move context]
+                  (if (nil? context) :first-context :second-context))
+              )
     )
   )
 )
