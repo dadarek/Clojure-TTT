@@ -122,7 +122,7 @@
       (let [board '(:o :x :x
                     :x :o nil
                     :x :o nil)]
-        (should= #{6 9} (empty-squares board))
+        (should= #{6 9} (get-empty-squares board))
       )
     )
 
@@ -130,7 +130,7 @@
       (let [board '(nil nil nil
                     nil nil nil
                     nil nil nil)]
-        (should= (set (range 1 10)) (empty-squares board))
+        (should= (set (range 1 10)) (get-empty-squares board))
       )
     )
 
@@ -138,7 +138,7 @@
       (let [board '(:x :o :x
                     :o :o :x
                     :x :x :o)]
-        (should= #{} (empty-squares board))
+        (should= #{} (get-empty-squares board))
       )
     )
   )

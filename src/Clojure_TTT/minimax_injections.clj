@@ -30,7 +30,7 @@
 )
 
 ;TODO: Move this into utils
-(defn empty-squares [board]
+(defn get-empty-squares [board]
   ( let [empty-square? #(nil? (nth board %))
          not-nil? #(not= nil %)
          index-squares #(if (empty-square? %) (inc %))]
@@ -56,6 +56,7 @@
 
 (defn sum-of-children [square context]
   (let [next-player (#(if (= :x (:player context)) :o :x))
+        empty-squares (get-empty-squares (:board context))
         new-board (#(take-square square context))
         new-context {:player next-player
                      :board new-board} ]
