@@ -4,40 +4,37 @@
 
 (describe "Generic Minimax"
   (it "Returns 0 on moves that tie"
-    (let [winning-moves (fn [move context] (not= 0 move))
-          tie-moves (fn [move context] (= 0 move))]
+    (let [wins (fn [move context] (not= 0 move))
+          ties (fn [move context] (= 0 move))]
       (should= '(0 1 1)
-               (score #{0 1 2} nil winning-moves tie-moves nil))
+               (score #{0 1 2} nil wins ties nil))
     )
   )
 
   (it "Returns 1 for moves that win"
-    (let [winning-moves (fn [move context] (= 1 move))
-          tie-moves (fn [move context] (not= 1 move))]
+    (let [wins (fn [move context] (= 1 move))
+          ties (fn [move context] (not= 1 move))]
       (should= '(0 1 0)
-               (score #{0 1 2} nil winning-moves tie-moves nil))
+               (score #{0 1 2} nil wins ties nil))
     )
   )
 
   (it "Sums scores of immediate child moves"
-    (should= '(1 1)
-             (score #{0 1} nil
-                (fn [move context]
-                  (= :context context))
-                (fn [move context] false)
-                (fn [move context] :context))
+    (let [wins (fn [move context] (= :context context))
+          ties (fn [move context] false)
+          next-context (fn [move context] :context)]
+      (should= '(1 1)
+               (score #{0 1} nil wins ties next-context))
     )
   )
 
   (it "Sums scores of all grandchildren moves"
-    (should= '(2 2 2)
-             (score #{0 1 2} nil
-                (fn [move context]
-                  (= :second-context context))
-                (fn [move context] false)
-                (fn [move context]
-                  (if (nil? context) :first-context :second-context))
-              )
+    (let [wins (fn [move context] (= :second-context context))
+          ties (fn [move context] false)
+          next-context (fn [move context]
+                         (if (nil? context) :first-context :second-context))]
+      (should= '(2 2 2)
+                 (score #{0 1 2} nil wins ties next-context))
     )
   )
 )
