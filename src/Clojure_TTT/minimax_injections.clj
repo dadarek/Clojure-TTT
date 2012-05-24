@@ -18,7 +18,10 @@
 
 ;TODO: Move this into utils
 (defn replace-in-list [l index new-value]
-  (concat (take index l) (list new-value) (nthnext l (inc index))))
+  (concat
+    (take index l)
+    (list new-value)
+    (nthnext l (inc index))))
 
 ;TODO: Move this into utils
 (defn take-square [square context]
