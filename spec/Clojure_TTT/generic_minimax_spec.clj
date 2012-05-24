@@ -7,10 +7,9 @@
     (should= '(0 0 0)
               (score
                 #{0 1 2}
-                nil
-                nil
-                (fn [move board player] false)
-                (fn [move board player] true)
+                :context
+                (fn [move context] false)
+                (fn [move context] true)
                 nil
       )
     )
@@ -19,10 +18,9 @@
     (should= '(1 1 1)
               (score
                 #{0 1 2}
-                nil
-                nil
-                (fn [move board player] true)
-                (fn [move board player] false)
+                :context
+                (fn [move context] true)
+                (fn [move context] false)
                 nil
       )
     )
@@ -31,11 +29,10 @@
     (should= '(2 2 2)
               (score
                 #{0 1 2}
-                nil
-                nil
-                (fn [move board player] false)
-                (fn [move board player] false)
-                (fn [move board player] 2)
+                :context
+                (fn [move context] false)
+                (fn [move context] false)
+                (fn [move context] 2)
       )
     )
   )
