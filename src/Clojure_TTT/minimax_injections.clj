@@ -4,9 +4,13 @@
 
 
 (defn player-squares [board player]
-  (set
-    (filter #(not= nil %)
-      (map (fn [i] (if (= player (nth board i)) (inc i))) (range 0 9))
+  ( let [owns? #(= player (nth board %))
+         not-nil? #(not= nil %)
+         index-squares #(if (owns? %) (inc %))]
+    (set
+      (filter not-nil?
+        (map index-squares (range 0 9))
+      )
     )
   )
 )
