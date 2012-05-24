@@ -21,3 +21,7 @@
                    (:player context))
            square))
 )
+
+(defn ties? [square context]
+  true
+)

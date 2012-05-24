@@ -29,6 +29,18 @@
       )
     )
   )
+
+  (context "Ties"
+    (it "Recognizes a tie."
+      (let [context { :player :x
+                      :board '(:x :x :o
+                               :o :o :x
+                               :x :o nil)}]
+        (should (ties? 9 context))
+      )
+    )
+  )
+
   ; TODO: Move this out into board utils or something
   (context "Player squares"
     (it "finds player x squares"
