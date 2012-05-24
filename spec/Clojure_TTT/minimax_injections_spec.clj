@@ -12,6 +12,7 @@
         (should (wins? 3 context))
       )
     )
+
     (it "Recognizes non-winning move."
       (let [context { :player :x
                       :board '(:x :o nil
@@ -20,6 +21,7 @@
         (should-not (wins? 3 context))
       )
     )
+
     (it "Works on both players."
       (let [context { :player :o
                       :board '(:x :o nil
@@ -39,6 +41,7 @@
         (should (ties? 9 context))
       )
     )
+
     (it "Knows when there is no tie yet"
       (let [context { :player :x
                       :board '(:x :x :o
@@ -58,6 +61,7 @@
         (should= -1 (sum-of-children 8 context))
       )
     )
+
     (it "Returns 0 when opponent ties on move after"
       (let [context { :player :o
                       :board '(:o :x :x
@@ -76,6 +80,7 @@
                                         nil :x nil)
                                        :x))
     )
+
     (it "finds player o squares"
       (should= #{5 9} (player-squares '(:x :x nil
                                         nil :o nil
@@ -97,6 +102,7 @@
         (should= expected-board (take-square 3 context))
       )
     )
+
     (it "Takes into consideration both players"
       (let [context { :player :o
                       :board '(:o :x :x
@@ -106,6 +112,33 @@
                                :x :o :o
                                :x :o nil)]
         (should= expected-board (take-square 6 context))
+      )
+    )
+  )
+
+  ;TODO: Move this into utils
+  (context "Empty squares"
+    (it "Finds empty squares"
+      (let [board '(:o :x :x
+                    :x :o nil
+                    :x :o nil)]
+        (should= #{6 9} (empty-squares board))
+      )
+    )
+
+    (it "Recognizes an empty board"
+      (let [board '(nil nil nil
+                    nil nil nil
+                    nil nil nil)]
+        (should= (set (range 1 10)) (empty-squares board))
+      )
+    )
+
+    (it "Recognizes a full board"
+      (let [board '(:x :o :x
+                    :o :o :x
+                    :x :x :o)]
+        (should= #{} (empty-squares board))
       )
     )
   )

@@ -29,6 +29,19 @@
   (replace-in-list (:board context) (dec square) (:player context))
 )
 
+;TODO: Move this into utils
+(defn empty-squares [board]
+  ( let [empty-square? #(nil? (nth board %))
+         not-nil? #(not= nil %)
+         index-squares #(if (empty-square? %) (inc %))]
+    (set
+      (filter not-nil?
+        (map index-squares (range 0 9))
+      )
+    )
+  )
+)
+
 (defn wins? [square context]
   (winner? (conj (player-squares
                    (:board context)
