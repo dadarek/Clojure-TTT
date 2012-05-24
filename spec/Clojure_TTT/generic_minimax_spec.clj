@@ -7,7 +7,6 @@
     (should= '(0 0 0) (score #{0 1 2} nil
                         (fn [move context] false)
                         (fn [move context] true)
-                        nil
                         nil)
     )
   )
@@ -16,36 +15,17 @@
     (should= '(1 1 1) (score #{0 1 2} nil
                         (fn [move context] true)
                         nil
-                        nil
                         nil)
     )
   )
 
-  (it "Callsback next-context"
-    (should-throw (dorun (score #{0} nil
-                        (fn [move context] false)
-                        (fn [move context] false)
-                        (fn [move context] 0)
-                        (fn [move context] (throw "Good"))))
-    )
-  )
-
-  ;TODO: dump this after you stop calling sum-of-children
-  (it "Returns sum of children for moves that don't win or tie"
-    (dorun (score #{0 1 2} nil
-              (fn [move context] false)
-              (fn [move context] false)
-              (fn [move context] 2)
-              (fn [move context] context))
-    )
-  )
-
-  (it "Passes context back to the injected functions"
-    (dorun (score [0] :context
-              (fn [move context] (should= :context context) false)
-              (fn [move context] (should= :context context) false)
-              (fn [move context] (should= :context context) 3)
-              (fn [move context] (should= :context context) context))
+  (it "Sums scores of immediate child moves"
+    (should= '(1 1)
+             (score #{0 1} nil
+                (fn [move context]
+                  (if (= :context context) 1))
+                (fn [move context] false)
+                (fn [move context] :context))
     )
   )
 )
