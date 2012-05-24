@@ -54,11 +54,13 @@
 
   (context "Next Context"
     (it "Switches the player"
-      (should= :x (:player (next-context nil {:player :o})))
-      (should= :o (:player (next-context nil {:player :x})))
+      (let [get-context #(next-context 0 {:board '(0) :player %} ) ]
+        (should= :x (:player (get-context :o)))
+        (should= :o (:player (get-context :x)))
+      )
     )
 
-    (it "Updates the board"
+    (it "Marks the correct square"
       (let [old-board '(:x  :o  :x
                         nil nil nil
                         nil nil nil)
@@ -67,6 +69,18 @@
                         nil nil nil)
             context {:player :o :board old-board}]
         (should= new-board (:board (next-context 5 context)))
+      )
+    )
+
+    (it "Playces the correct player"
+      (let [old-board '(:o  :o  :x
+                        nil nil nil
+                        nil nil nil)
+            new-board '(:o  :o  :x
+                        nil nil nil
+                        nil nil :x)
+            context {:player :x :board old-board}]
+        (should= new-board (:board (next-context 9 context)))
       )
     )
   )

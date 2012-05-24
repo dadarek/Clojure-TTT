@@ -17,10 +17,9 @@
 )
 
 (defn next-context [square context]
-  (let [next-player (if (= :x (:player context)) :o :x)]
-    {:player next-player :board '(:x  :o :x
-                                  nil :o  nil
-                                  nil nil nil)}
+  (let [next-player (if (= :x (:player context)) :o :x)
+        new-board (take-square square context)]
+    {:player next-player :board new-board}
   )
 )
 
