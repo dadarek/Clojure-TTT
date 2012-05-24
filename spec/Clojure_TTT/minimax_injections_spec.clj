@@ -52,23 +52,10 @@
     )
   )
 
-  (context "Sum of Children"
-    (it "Returns -1 when opponent wins on move after"
-      (let [context { :player :o
-                      :board '(:x :o :x
-                               :x :x :o
-                               :o nil nil)}]
-        (should= -1 (sum-of-children 8 context))
-      )
-    )
-
-    (it "Returns 0 when opponent ties on move after"
-      (let [context { :player :o
-                      :board '(:o :x :x
-                               :x :o :o
-                               :x nil nil)}]
-        (should= 0 (sum-of-children 8 context))
-      )
+  (context "Next Context"
+    (it "Switches the player"
+      (should= :x (:player (next-context nil {:player :o})))
+      (should= :o (:player (next-context nil {:player :x})))
     )
   )
 )

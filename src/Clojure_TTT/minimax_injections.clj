@@ -16,12 +16,8 @@
     (= 1 squares-left))
 )
 
-(defn sum-of-children [square context]
-  (let [next-player (#(if (= :x (:player context)) :o :x))
-        empty-squares (get-empty-squares (:board context))
-        new-board (#(take-square square context))
-        new-context {:player next-player
-                     :board new-board} ]
-  (reduce + (map #(sum-of-children % new-context) empty-squares)))
-  ; this has to get injected back into minimax
+(defn next-context [square context]
+  {:player (if (= :x (:player context)) :o :x)}
 )
+
+; TODO: Dump any utility functions that aren't being used
