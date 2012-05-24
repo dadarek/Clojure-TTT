@@ -49,6 +49,17 @@
     )
   )
 
+  (context "Sum of Children"
+    (it "Returns -1 when opponent wins on move after"
+      (let [context { :player :o
+                      :board '(:x :o :x
+                               :x :x :o
+                               :o nil nil)}]
+        (should= -1 (sum-of-children 8 context))
+      )
+    )
+  )
+
   ; TODO: Move this out into board utils or something
   (context "Player squares"
     (it "finds player x squares"

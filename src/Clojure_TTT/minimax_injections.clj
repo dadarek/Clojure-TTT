@@ -26,3 +26,7 @@
   (let [squares-left (#(count (filter nil? (:board context))))]
     (= 1 squares-left))
 )
+
+(defn sum-of-children [square context]
+  -1
+)
