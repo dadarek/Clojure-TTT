@@ -23,5 +23,5 @@
 )
 
 (defn ties? [square context]
-  true
+  (= 1 (count (filter nil? (:board context))))
 )

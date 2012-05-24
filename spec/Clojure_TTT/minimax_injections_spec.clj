@@ -39,6 +39,14 @@
         (should (ties? 9 context))
       )
     )
+    (it "Knows when there is no tie yet"
+      (let [context { :player :x
+                      :board '(:x :x :o
+                               :o :o :x
+                               :x nil nil)}]
+        (should-not (ties? 9 context))
+      )
+    )
   )
 
   ; TODO: Move this out into board utils or something
