@@ -11,10 +11,5 @@
                    (next-context move context)
                    wins?
                    ties?
-                   next-context))
-        )
-      )
-    )
-    moves
-  )
-)
+                   next-context)))))
+    moves))

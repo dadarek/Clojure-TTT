@@ -8,16 +8,13 @@
       (should= #{1 2 8} (player-squares '(:x :x nil
                                         nil nil :o
                                         nil :x nil)
-                                       :x))
-    )
+                                       :x)))
 
     (it "finds player o squares"
       (should= #{5 9} (player-squares '(:x :x nil
                                         nil :o nil
                                         nil :x :o)
-                                       :o))
-    )
-  )
+                                       :o))))
 
   (context "Taking squares"
     (it "Appends player to board on correct square"
@@ -28,9 +25,7 @@
             expected-board   '(:o :x :x
                                :x :o nil
                                :x :o nil)]
-        (should= expected-board (take-square 3 context))
-      )
-    )
+        (should= expected-board (take-square 3 context))))
 
     (it "Takes into consideration both players"
       (let [context { :player :o
@@ -40,36 +35,25 @@
             expected-board   '(:o :x :x
                                :x :o :o
                                :x :o nil)]
-        (should= expected-board (take-square 6 context))
-      )
-    )
-  )
+        (should= expected-board (take-square 6 context)))))
 
   (context "Empty squares"
     (it "Finds empty squares"
       (let [board '(:o :x :x
                     :x :o nil
                     :x :o nil)]
-        (should= #{6 9} (get-empty-squares board))
-      )
-    )
+        (should= #{6 9} (get-empty-squares board))))
 
     (it "Recognizes an empty board"
       (let [board '(nil nil nil
                     nil nil nil
                     nil nil nil)]
-        (should= (set (range 1 10)) (get-empty-squares board))
-      )
-    )
+        (should= (set (range 1 10)) (get-empty-squares board))))
 
     (it "Recognizes a full board"
       (let [board '(:x :o :x
                     :o :o :x
                     :x :x :o)]
-        (should= #{} (get-empty-squares board))
-      )
-    )
-  )
-)
+        (should= #{} (get-empty-squares board))))))
 
 (run-specs)
