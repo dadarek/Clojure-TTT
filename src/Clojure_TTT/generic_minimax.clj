@@ -2,14 +2,15 @@
 
 
 (defn score [moves context wins? ties? next-context]
-  (map
-    (fn [move]
+  (let [score-move (fn [move]
       (if (wins? move context) 1
-        (if (ties? move context) 0
-          (- (reduce + (score
-                   (disj moves move)
-                   (next-context move context)
-                   wins?
-                   ties?
-                   next-context))))))
-    moves))
+      (if (ties? move context) 0
+      (- (reduce + 
+            (score
+               (disj moves move)
+               (next-context move context)
+               wins?
+               ties?
+               next-context))))))]
+    (map score-move moves)))
+      
