@@ -15,11 +15,13 @@
       (should= '(0 1 0)
                (score #{0 1 2} nil wins ties nil))))
 
-  (it "Sums scores of immediate child moves"
+  (it "Returns negated
+        (sum of the
+          (scores of immediate child moves))"
     (let [wins (fn [move context] (= :first-context context))
           ties (fn [move context] false)
           next-context (fn [move context] :first-context)]
-      (should= '(1 1)
+      (should= '(-1 -1)
                (score #{0 1} nil wins ties next-context))))
 
   (it "Sums scores of all grandchildren moves"

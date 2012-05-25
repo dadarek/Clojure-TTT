@@ -6,10 +6,10 @@
     (fn [move]
       (if (wins? move context) 1
         (if (ties? move context) 0
-          (reduce + (score
+          (- (reduce + (score
                    (disj moves move)
                    (next-context move context)
                    wins?
                    ties?
-                   next-context)))))
+                   next-context))))))
     moves))
