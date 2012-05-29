@@ -33,3 +33,6 @@
 (defn count-taken-squares [board]
   (- 9 (count-empty-squares board)))
 
+(defn full? [board]
+  (= 9 (count-taken-squares board)))
+

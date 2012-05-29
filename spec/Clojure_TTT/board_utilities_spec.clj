@@ -78,6 +78,15 @@
 
     (it "Counts a full board"
       (should= 9 (count-taken-squares full-board))))
-)
+
+  (context "Full"
+    (it "Knows a non-full board"
+      (should-not (full? six-nine-empty)))
+
+    (it "Knows an empty board"
+      (should-not (full? empty-board)))
+
+    (it "Knows a full board"
+      (should (full? full-board)))))
 
 (run-specs)
