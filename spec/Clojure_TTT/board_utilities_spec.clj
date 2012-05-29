@@ -59,26 +59,6 @@
     (it "Recognizes a full board"
       (should= #{} (get-empty-squares full-board))))
 
-  (context "Counting Empty Squares"
-    (it "Knows how to count empty squares"
-      (should= 2 (count-empty-squares six-nine-empty)))
-
-    (it "Counts an empty board"
-      (should= 9 (count-empty-squares empty-board)))
-
-    (it "Counts a full board"
-      (should= 0 (count-empty-squares full-board))))
-
-  (context "Counting Taken Squares"
-    (it "Knows how to count taken squares"
-      (should= 7 (count-taken-squares six-nine-empty)))
-
-    (it "Counts an empty board"
-      (should= 0 (count-taken-squares empty-board)))
-
-    (it "Counts a full board"
-      (should= 9 (count-taken-squares full-board))))
-
   (context "Full"
     (it "Knows a non-full board"
       (should-not (full? six-nine-empty)))
