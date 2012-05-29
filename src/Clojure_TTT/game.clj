@@ -1,5 +1,8 @@
 (ns clojure_ttt.game)
 
-(defn skskgo []
-  true)
+(defprotocol GameUI
+  (play-again? [ui]))
+
+(defn play [ui]
+  (while (play-again? ui) ))
 
