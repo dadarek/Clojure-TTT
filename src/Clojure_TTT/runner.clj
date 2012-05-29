@@ -3,8 +3,7 @@
   (:use [clojure_ttt.rules]))
 
 (defprotocol Player
-  (next-move [p board])
-)
+  (next-move [p board]))
 
 (defn next-player [context]
   (if (= :x (:player context)) :o :x))
