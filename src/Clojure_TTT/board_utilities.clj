@@ -27,3 +27,9 @@
       (filter not-nil?
         (map index-squares (range 0 9))))))
 
+(defn count-empty-squares [board]
+  (count (get-empty-squares board)))
+
+(defn count-taken-squares [board]
+  (- 9 (count-empty-squares board)))
+
