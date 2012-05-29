@@ -3,16 +3,10 @@
   (:use [clojure_ttt.board_utilities])
   (:use [speclj.core]))
 
-(defn x-moves [board]
-  (nth '(1 3 4 8 9) (count (player-squares board :x))))
-
-(defn o-moves [board]
-  (nth '(2 5 6 7) (count (player-squares board :o))))
-
-(defrecord MockPlayer [move-maker]
+(defrecord MockPlayer [moves player]
   Player
-  (next-move [this board] (move-maker board))
-)
+  (next-move [this board]
+    (nth moves (count (player-squares board player)))))
 
 
 (describe "Game Runner"
@@ -20,6 +14,7 @@
     (should= '(:x :o :x
                :x :o :o
                :o :x :x)
-              (run (MockPlayer. x-moves) (MockPlayer. o-moves)))))
+              (run (MockPlayer. '(1 3 4 8 9) :x)
+                   (MockPlayer. '(2 5 6 7) :o)))))
 
 (run-specs)
