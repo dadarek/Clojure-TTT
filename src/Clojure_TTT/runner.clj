@@ -3,22 +3,20 @@
   (:use [clojure_ttt.rules]))
 
 (defprotocol Player
-  (next-move [p board]))
+  (next-move [player board]))
 
-(defn next-player [context]
-  (if (= :x (:player context)) :o :x))
+(def empty-board '(nil nil nil nil nil nil nil nil nil))
 
 (defn run [x o]
-  (loop [context {:board '(nil nil nil nil nil nil nil nil nil) :player :x}]
-    (let [board (:board context)
-          x-won (winner? (player-squares board :x))
-          o-won (winner? (player-squares board :o))]
-      (if (or (full? board) x-won o-won)
+  (loop [board empty-board
+         player :x]
+    (let [x-won? (winner? (player-squares board :x))
+          o-won? (winner? (player-squares board :o))]
+      (if (or (full? board) x-won? o-won?)
         board
-        (let [current-player (if (= :x (:player context)) x o)
+        (let [current-player (if (= :x player) x o)
               next-move (next-move current-player board)
-              new-board (take-square next-move context)
-              new-player (next-player context)
-              new-context {:board new-board :player new-player} ]
-          (recur new-context))))))
+              new-board (take-square next-move {:board board :player player})
+              new-player (if (= :x player) :o :x)]
+          (recur new-board new-player))))))
 
