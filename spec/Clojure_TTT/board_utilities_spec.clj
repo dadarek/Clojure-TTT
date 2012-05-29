@@ -2,6 +2,18 @@
   (:use [clojure_ttt.board_utilities])
   (:use [speclj.core]))
 
+(def full-board '(:x :o :x
+                  :o :o :x
+                  :x :x :o))
+
+(def empty-board '(nil nil nil
+                   nil nil nil
+                   nil nil nil))
+
+(def six-nine-empty '(:o :x :x
+                      :x :o nil
+                      :x :o nil))
+
 (describe "Board Utilities"
   (context "Player squares"
     (it "finds player x squares"
@@ -39,58 +51,33 @@
 
   (context "Empty squares"
     (it "Finds empty squares"
-      (let [board '(:o :x :x
-                    :x :o nil
-                    :x :o nil)]
-        (should= #{6 9} (get-empty-squares board))))
+      (should= #{6 9} (get-empty-squares six-nine-empty)))
 
     (it "Recognizes an empty board"
-      (let [board '(nil nil nil
-                    nil nil nil
-                    nil nil nil)]
-        (should= (set (range 1 10)) (get-empty-squares board))))
+      (should= (set (range 1 10)) (get-empty-squares empty-board)))
 
     (it "Recognizes a full board"
-      (let [board '(:x :o :x
-                    :o :o :x
-                    :x :x :o)]
-        (should= #{} (get-empty-squares board)))))
+      (should= #{} (get-empty-squares full-board))))
 
   (context "Counting Empty Squares"
     (it "Knows how to count empty squares"
-      (let [board '(:o :x :x
-                    :x :o nil
-                    :x :o nil)]
-        (should= 2 (count-empty-squares board))))
+      (should= 2 (count-empty-squares six-nine-empty)))
+
     (it "Counts an empty board"
-      (let [board '(nil nil nil
-                    nil nil nil
-                    nil nil nil)]
-        (should= 9 (count-empty-squares board))))
+      (should= 9 (count-empty-squares empty-board)))
 
     (it "Counts a full board"
-      (let [board '(:x :o :x
-                    :o :o :x
-                    :x :x :o)]
-        (should= 0 (count-empty-squares board)))))
+      (should= 0 (count-empty-squares full-board))))
 
   (context "Counting Taken Squares"
     (it "Knows how to count taken squares"
-      (let [board '(:o :x :x
-                    :x :o nil
-                    :x :o nil)]
-        (should= 7 (count-taken-squares board))))
-    (it "Counts an taken board"
-      (let [board '(nil nil nil
-                    nil nil nil
-                    nil nil nil)]
-        (should= 0 (count-taken-squares board))))
+      (should= 7 (count-taken-squares six-nine-empty)))
+
+    (it "Counts an empty board"
+      (should= 0 (count-taken-squares empty-board)))
 
     (it "Counts a full board"
-      (let [board '(:x :o :x
-                    :o :o :x
-                    :x :x :o)]
-        (should= 9 (count-taken-squares board)))))
+      (should= 9 (count-taken-squares full-board))))
 )
 
 (run-specs)
