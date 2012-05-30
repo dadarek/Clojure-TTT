@@ -1,5 +1,6 @@
 (ns clojure_ttt.computer-spec
   (:use clojure_ttt.runner)
+  (:use clojure_ttt.computer)
   (:import [clojure_ttt.computer Computer])
   (:use [speclj.core]))
 
