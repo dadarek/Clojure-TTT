@@ -12,6 +12,16 @@
 
   (it "Returns first square if several have high score"
     (with-redefs [score (fn [& args] '(3 3 2))]
-      (should= 1 (next-move (Computer. :o) nil)))))
+      (should= 1 (next-move (Computer. :o) nil))))
+
+  (it "passes in all open moves"
+    (let [board '(:x  :o nil
+                  nil :x nil
+                  nil :o nil)]
+      (with-redefs [score (fn [moves & args]
+                            (throw (Exception. (str moves))))]
+        (should-throw Exception "#{3 4 6 7 9}"
+                      (next-move (Computer. :o) board)))))
+)
 
 (run-specs)
