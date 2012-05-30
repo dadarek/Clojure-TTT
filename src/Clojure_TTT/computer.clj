@@ -11,7 +11,8 @@
           context {:board board :player x-or-o}
           scores (score possible-moves context
                         wins? ties? next-context)
-          top-score (reduce max scores)]
-      (inc (.indexOf scores top-score))
+          top-score (reduce max scores)
+          top-score-index (.indexOf scores top-score)]
+      (nth (seq possible-moves) top-score-index)
     )))
 

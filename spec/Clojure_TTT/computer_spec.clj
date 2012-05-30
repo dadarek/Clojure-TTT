@@ -17,8 +17,11 @@
         (should= 4 (next-move computer board)))))
 
   (it "returns first square if several have high score"
-    (with-redefs [score (fn [& args] '(3 3 2))]
-      (should= 1 (next-move (Computer. :o) nil))))
+    (let [board '(:x  :x :o
+                  :o  :o nil
+                  nil nil :x)]
+      (with-redefs [score (fn [& args] '(3 3 2))]
+        (should= 6 (next-move computer board)))))
 
   (it "passes in all open moves to minimax"
     (let [board '(:x  :o nil
