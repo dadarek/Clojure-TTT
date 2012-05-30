@@ -18,7 +18,13 @@
     (should-not (won? #{1 5 6}))
     (should-not (won? #{7 8}))
     (should-not (won? #{9}))
-    (should-not (won? #{3 7}))))
+    (should-not (won? #{3 7})))
+
+  (it "scores winning square as 1"
+    (should= 1 (score :x 9 '(:x :o :x
+                             :o :x :o
+                             :o :x nil))))
+)
 
 (run-specs)
 
