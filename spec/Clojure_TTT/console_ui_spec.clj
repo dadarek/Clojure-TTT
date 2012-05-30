@@ -14,6 +14,16 @@
   (it "Ignores non-numeric entries"
     (with-in-str "s\n8"
       (should= 8
+        (get-next-move (ConsoleUI.)))))
+
+  (it "Ignores values > 9"
+    (with-in-str "10\n15\n9"
+      (should= 9
+        (get-next-move (ConsoleUI.)))))
+
+  (it "Ignores values < 1"
+    (with-in-str "0\n-2\n1"
+      (should= 1
         (get-next-move (ConsoleUI.))))))
 
 (run-specs)

@@ -5,7 +5,9 @@
   NextMoveUI
   (get-next-move [this]
     (loop [result nil]
-      (if (not= nil result)
+      (if (and (not= nil result)
+               (> 10 result)
+               (< 0 result))
         result
       (recur (try (Integer/parseInt (read-line))
                   (catch NumberFormatException e nil)))))))
