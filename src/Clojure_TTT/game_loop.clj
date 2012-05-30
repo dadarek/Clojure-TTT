@@ -7,8 +7,9 @@
 
 (defn play [human computer ui]
   (loop []
-    (go-first? ui)
-    (run human computer)
+    (if (go-first? ui)
+      (run human computer)
+      (run computer human))
     (if (play-again? ui)
        (recur))))
 
