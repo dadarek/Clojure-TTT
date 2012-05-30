@@ -34,11 +34,15 @@
     (loop [result nil]
       (if (or (= "y" result) (= "n" result))
         (= "y" result)
-        (recur (read-line)))))
+        (do
+          (println "Would you like to play again?")
+          (recur (read-line))))))
 
   (go-first? [_]
     (loop [result nil]
       (if (or (= "y" result) (= "n" result))
         (= "y" result)
-        (recur (read-line))))))
+        (do
+          (println "Would you like to go first?")
+          (recur (read-line)))))))
 

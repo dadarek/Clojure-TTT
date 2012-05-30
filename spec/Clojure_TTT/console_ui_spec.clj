@@ -58,29 +58,39 @@
                                             :o  :o  :x))))))
   (context "LoopUI"
     (context "play-again?"
+      (it "Prints message to console"
+        (should= (apply str (repeat 3 "Would you like to play again?\n"))
+          (with-out-str (with-in-str "b\nb\ny"
+            (do (play-again? (ConsoleUI.)))))))
+
       (it "Reads 'yes' values"
-        (with-in-str "y"
-          (should= true (play-again? (ConsoleUI.)))))
+        (with-out-str (with-in-str "y"
+          (should= true (play-again? (ConsoleUI.))))))
 
       (it "Reads 'no' values"
-        (with-in-str "n"
-          (should= false (play-again? (ConsoleUI.)))))
+        (with-out-str (with-in-str "n"
+          (should= false (play-again? (ConsoleUI.))))))
 
       (it "Ignores bogus values"
-        (with-in-str "1\n7\nfjfj\nyn\ny"
+        (with-out-str (with-in-str "1\n7\nfjfj\nyn\ny"
           (should= true (play-again? (ConsoleUI.))))))
 
     (context "go-first?"
+      (it "Prints message to console"
+        (should= (apply str (repeat 3 "Would you like to go first?\n"))
+          (with-out-str (with-in-str "b\nb\ny"
+            (do (go-first? (ConsoleUI.)))))))
+
       (it "Reads 'yes' values"
-        (with-in-str "y"
-          (should= true (go-first? (ConsoleUI.)))))
+        (with-out-str (with-in-str "y"
+          (should= true (go-first? (ConsoleUI.))))))
 
       (it "Reads 'no' values"
-        (with-in-str "n"
-          (should= false (go-first? (ConsoleUI.)))))
+        (with-out-str (with-in-str "n"
+          (should= false (go-first? (ConsoleUI.))))))
 
       (it "Ignores bogus values"
-        (with-in-str "1\n7\nfjfj\nyn\ny"
-          (should= true (go-first? (ConsoleUI.))))))))
+        (with-out-str (with-in-str "1\n7\nfjfj\nyn\ny"
+          (should= true (go-first? (ConsoleUI.))))))))))
 
 (run-specs)
