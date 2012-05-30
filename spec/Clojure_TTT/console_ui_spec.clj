@@ -59,6 +59,10 @@
   (context "LoopUI"
     (it "Reads 'yes' values"
       (with-in-str "y"
-        (should= true (play-again? (ConsoleUI.)))))))
+        (should= true (play-again? (ConsoleUI.)))))
+
+    (it "Reads 'no' values"
+      (with-in-str "n"
+        (should= false (play-again? (ConsoleUI.)))))))
 
 (run-specs)
