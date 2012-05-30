@@ -2,15 +2,18 @@
   (:use [clojure_ttt.game_loop])
   (:use [speclj.core]))
 
+(defn inc-counter [counter]
+  (dosync (ref-set counter (inc @counter))))
+
 (deftype MockLoopUI [play-again-counter go-first-counter responses]
   LoopUI
   (play-again? [_]
     (let [result (nth responses @play-again-counter)]
-      (dosync (ref-set play-again-counter (inc @play-again-counter)))
+      (inc-counter play-again-counter)
       result))
   (go-first? [_]
     (let [result (nth responses @go-first-counter)]
-      (dosync (ref-set go-first-counter (inc @go-first-counter)))
+      (inc-counter go-first-counter)
       result)))
 
 (describe "Game Loop"
