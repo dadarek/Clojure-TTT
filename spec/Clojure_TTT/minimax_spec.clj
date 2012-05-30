@@ -24,6 +24,11 @@
     (should= 1 (score :x 9 '(:x :o :x
                              :o :x :o
                              :o :x nil))))
+
+  (it "scores tie square as 0"
+    (should= 0 (score :x 2 '(:o  nil :o
+                             :x  :o  :x
+                             :x  :o  :x))))
 )
 
 (run-specs)

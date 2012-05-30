@@ -1,4 +1,5 @@
 (ns clojure_ttt.minimax
+  (:use clojure_ttt.board_utilities)
   (:use clojure.set))
 
 
@@ -9,4 +10,8 @@
          #{1 5 9} #{3 5 7}])
   (some #(subset? % squares) winning-combinations))
 
-(defn score [player square board] 1)
+(defn score [player square board]
+  (def new-squares (conj (player-squares board player) square))
+
+  (if (won? new-squares) 1 0)
+)
