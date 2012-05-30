@@ -20,10 +20,10 @@
     (let [symbol-for #(cond (= :x %) "x" (= :o %) "o" :default " ")
           row-1 (take 3 board)
           row-2 (drop 3 (take 6 board))
-          row-3 (drop 6 board)]
-
+          row-3 (drop 6 board)
+          format-row #(apply str (interpose "|" (map symbol-for %)))]
       (do
-        (println (apply str (interpose "|" (map symbol-for row-1))))
-        (println (apply str (interpose "|" (map symbol-for row-2))))
-        (println (apply str (interpose "|" (map symbol-for row-3))))))))
+        (println (format-row row-1))
+        (println (format-row row-2))
+        (println (format-row row-3))))))
 
