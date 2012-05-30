@@ -9,6 +9,7 @@
                     (catch NumberFormatException e nil)) ]
     (loop []
       (print "Please select a square: ")
+      (flush)
       (let [result (try-read)]
         (if (is-valid result)
           result
