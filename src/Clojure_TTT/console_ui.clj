@@ -29,5 +29,9 @@
         (println (format-row row-2))
         (println (format-row row-3)))))
   LoopUI
-  (play-again? [_] (= "y" (read-line))))
+  (play-again? [_] 
+    (loop [result nil]
+      (if (or (= "y" result) (= "n" result))
+        (= "y" result)
+        (recur (read-line))))))
 

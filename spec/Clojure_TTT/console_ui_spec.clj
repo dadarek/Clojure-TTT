@@ -63,6 +63,10 @@
 
     (it "Reads 'no' values"
       (with-in-str "n"
-        (should= false (play-again? (ConsoleUI.)))))))
+        (should= false (play-again? (ConsoleUI.)))))
+
+    (it "Ignores bogus values"
+      (with-in-str "1\n7\nfjfj\nyn\ny"
+        (should= true (play-again? (ConsoleUI.)))))))
 
 (run-specs)
