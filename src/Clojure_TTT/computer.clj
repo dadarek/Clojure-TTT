@@ -3,5 +3,5 @@
 
 (defrecord Computer [x-or-o]
   Player
-  (next-move [player board] x-or-o))
+  (next-move [player board] 2))
 
