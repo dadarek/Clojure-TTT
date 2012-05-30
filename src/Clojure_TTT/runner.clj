@@ -11,12 +11,16 @@
   (loop [board empty-board
          player :x]
     (let [x-won? (winner? (player-squares board :x))
-          o-won? (winner? (player-squares board :o))]
+          o-won? (winner? (player-squares board :o))
+          square-taken? #(not= nil (nth board (dec %)))]
+
       (if (or (full? board) x-won? o-won?)
         board
         (let [current-player (if (= :x player) x o)
-              next-move (next-move current-player board)
-              new-board (take-square next-move {:board board :player player})
-              new-player (if (= :x player) :o :x)]
-          (recur new-board new-player))))))
+              next-move (next-move current-player board)]
+          (if (square-taken? next-move)
+            (recur board player)
+            (let [new-board (take-square next-move {:board board :player player})
+                  new-player (if (= :x player) :o :x)]
+          (recur new-board new-player))))))))
 
