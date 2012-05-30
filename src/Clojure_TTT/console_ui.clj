@@ -3,6 +3,14 @@
   (:use clojure_ttt.game_loop)
   (:use clojure_ttt.human_player))
 
+(defn prompt [message]
+  (loop [result nil]
+    (if (or (= "y" result) (= "n" result))
+      (= "y" result)
+      (do
+        (println message)
+        (recur (read-line))))))
+
 (defrecord ConsoleUI []
   NextMoveUI
   (get-next-move [_]
@@ -30,19 +38,6 @@
         (println (format-row row-3)))))
 
   LoopUI
-  (play-again? [_] 
-    (loop [result nil]
-      (if (or (= "y" result) (= "n" result))
-        (= "y" result)
-        (do
-          (println "Would you like to play again?")
-          (recur (read-line))))))
-
-  (go-first? [_]
-    (loop [result nil]
-      (if (or (= "y" result) (= "n" result))
-        (= "y" result)
-        (do
-          (println "Would you like to go first?")
-          (recur (read-line)))))))
+  (play-again? [_] (prompt "Would you like to play again?"))
+  (go-first? [_] (prompt "Would you like to go first?")))
 
