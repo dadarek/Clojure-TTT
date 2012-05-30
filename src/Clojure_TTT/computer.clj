@@ -10,7 +10,7 @@
     (let [empty-squares (get-empty-squares board)
           scores (score empty-squares x-or-o
                         wins? ties? next-context)
-          top (reduce max scores)]
-      (inc (.indexOf scores top))
+          top-score (reduce max scores)]
+      (inc (.indexOf scores top-score))
     )))
 
