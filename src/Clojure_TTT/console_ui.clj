@@ -3,5 +3,10 @@
 
 (defrecord ConsoleUI []
   NextMoveUI
-  (get-next-move [this] 5))
+  (get-next-move [this]
+    (loop [result nil]
+      (if (not= nil result)
+        result
+      (recur (try (Integer/parseInt (read-line))
+                  (catch NumberFormatException e nil)))))))
 
