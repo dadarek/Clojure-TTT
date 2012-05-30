@@ -1,6 +1,5 @@
 (ns clojure_ttt.generic_minimax)
 
-
 (defn score [moves context wins? ties? get-child-context-of]
   (let [score-child-moves-of
           (fn [move]
