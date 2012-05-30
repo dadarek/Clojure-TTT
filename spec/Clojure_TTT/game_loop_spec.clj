@@ -2,17 +2,18 @@
   (:use [clojure_ttt.game_loop])
   (:use [speclj.core]))
 
-(deftype MockLoopUI []
+(deftype MockLoopUI [counter responses]
   LoopUI
-  (play-again? [x]
-    (print "1")
-    (= "y" (read-line))))
+  (play-again? [_]
+    (let [result (nth responses @counter)]
+      (dosync (ref-set counter (inc @counter)))
+      result)))
 
 (describe "Game Loop"
-  (it "Plays until user enters 'n'"
-    (should= "1111"
-      (with-out-str (with-in-str "y\ny\ny\nn"
-        (play (MockLoopUI.)))))))
+  (it "Plays until play-again returns false"
+    (def counter (ref 0))
+    (do (play (MockLoopUI. counter [true true true false]))
+    (should= 4 @counter))))
 
 (run-specs)
 
