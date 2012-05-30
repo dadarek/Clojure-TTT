@@ -5,8 +5,8 @@
 (defrecord Computer [x-or-o]
   Player
   (next-move [player board]
-    (let [result (score nil nil nil nil nil)
-          top (reduce max result)]
-      (inc (.indexOf result top))
+    (let [scores (score nil nil nil nil nil)
+          top (reduce max scores)]
+      (inc (.indexOf scores top))
     )))
 
