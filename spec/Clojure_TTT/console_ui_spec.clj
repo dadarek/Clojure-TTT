@@ -57,16 +57,30 @@
                                             nil :x  nil
                                             :o  :o  :x))))))
   (context "LoopUI"
-    (it "Reads 'yes' values"
-      (with-in-str "y"
-        (should= true (play-again? (ConsoleUI.)))))
+    (context "play-again?"
+      (it "Reads 'yes' values"
+        (with-in-str "y"
+          (should= true (play-again? (ConsoleUI.)))))
 
-    (it "Reads 'no' values"
-      (with-in-str "n"
-        (should= false (play-again? (ConsoleUI.)))))
+      (it "Reads 'no' values"
+        (with-in-str "n"
+          (should= false (play-again? (ConsoleUI.)))))
 
-    (it "Ignores bogus values"
-      (with-in-str "1\n7\nfjfj\nyn\ny"
-        (should= true (play-again? (ConsoleUI.)))))))
+      (it "Ignores bogus values"
+        (with-in-str "1\n7\nfjfj\nyn\ny"
+          (should= true (play-again? (ConsoleUI.))))))
+
+    (context "go-first?"
+      (it "Reads 'yes' values"
+        (with-in-str "y"
+          (should= true (go-first? (ConsoleUI.)))))
+
+      (it "Reads 'no' values"
+        (with-in-str "n"
+          (should= false (go-first? (ConsoleUI.)))))
+
+      (it "Ignores bogus values"
+        (with-in-str "1\n7\nfjfj\nyn\ny"
+          (should= true (go-first? (ConsoleUI.))))))))
 
 (run-specs)

@@ -34,5 +34,11 @@
     (loop [result nil]
       (if (or (= "y" result) (= "n" result))
         (= "y" result)
+        (recur (read-line)))))
+
+  (go-first? [_]
+    (loop [result nil]
+      (if (or (= "y" result) (= "n" result))
+        (= "y" result)
         (recur (read-line))))))
 
