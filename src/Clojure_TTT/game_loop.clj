@@ -1,8 +1,12 @@
 (ns clojure_ttt.game_loop)
 
 (defprotocol LoopUI
-  (play-again? [ui]))
+  (play-again? [_])
+  (go-first? [_]))
 
 (defn play [ui]
-  (while (play-again? ui) ))
+  (loop []
+    (go-first? ui)
+    (if (play-again? ui)
+       (recur))))
 
