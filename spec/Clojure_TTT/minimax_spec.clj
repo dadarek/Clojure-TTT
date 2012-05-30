@@ -34,6 +34,11 @@
     (should= -1 (score :x 6 '(:o  :x  :o
                              :x  :o  nil
                              :x  :o  nil))))
+
+  (it "scores a guaranteed-tie second-to-last move as 0"
+    (should= 0 (score :x 9 '(:o  :x  :o
+                             :x  :o  nil
+                             :x  :o  nil))))
 )
 
 (run-specs)

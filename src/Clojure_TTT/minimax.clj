@@ -11,12 +11,14 @@
   (some #(subset? % squares) winning-combinations))
 
 (defn score [player square board]
-  (def new-squares (conj (player-squares board player) square))
+  (def current-squares (player-squares board player))
+  (def new-squares (conj current-squares square))
   (def new-board (take-square square {:board board :player player}))
   (def opponent (if (= :x player) :o :x))
+  (def empty-squares (get-empty-squares new-board))
 
   (cond
     (won? new-squares) 1
     (full? new-board) 0
-    :else -1)
+    :else (- (score opponent (first empty-squares) new-board)))
 )
