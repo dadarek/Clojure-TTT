@@ -20,8 +20,16 @@
                   nil :o nil)]
       (with-redefs [score (fn [moves & args]
                             (throw (Exception. (str moves))))]
-        (should-throw Exception "#{3 4 6 7 9}"
-                      (next-move (Computer. :o) board)))))
+        (should-throw
+          Exception "#{3 4 6 7 9}"
+          (next-move (Computer. :o) board)))))
+
+  (it "passes in its symbol"
+    (with-redefs [score (fn [moves player & args]
+                          (throw (Exception. (str player))))]
+      (should-throw
+        Exception ":john"
+        (next-move (Computer. :john) nil))))
 )
 
 (run-specs)

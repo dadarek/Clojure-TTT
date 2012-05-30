@@ -7,7 +7,7 @@
   Player
   (next-move [player board]
     (let [empty-squares (get-empty-squares board)
-          scores (score empty-squares nil nil nil nil)
+          scores (score empty-squares x-or-o nil nil nil)
           top (reduce max scores)]
       (inc (.indexOf scores top))
     )))
