@@ -29,13 +29,13 @@
   (it "Prints prompt"
     (should= "Please select a square: "
       (with-out-str (with-in-str "2"
-          (should= 2
-            (get-next-move (ConsoleUI.)))))))
+        (should= 2
+          (get-next-move (ConsoleUI.)))))))
 
   (it "Prints prompt until valid square is entered"
     (should= (apply str (repeat 3 "Please select a square: "))
       (with-out-str (with-in-str "hi\nthere\n4"
-          (should= 4
-            (get-next-move (ConsoleUI.))))))))
+        (should= 4
+          (get-next-move (ConsoleUI.))))))))
 
 (run-specs)
