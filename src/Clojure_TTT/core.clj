@@ -1,4 +1,5 @@
 (ns clojure_ttt.core
+  (:use clojure_ttt.game_loop)
   (:use clojure_ttt.runner)
   (:use clojure_ttt.human_player)
   (:import [clojure_ttt.human_player HumanPlayer])
@@ -14,5 +15,5 @@
 
 
 (defn -main []
-  (run human computer ui)
+  (play human computer ui)
 )
