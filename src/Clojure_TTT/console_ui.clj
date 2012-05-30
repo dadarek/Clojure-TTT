@@ -17,7 +17,9 @@
           (recur))))))
   RunnerUI
   (redraw [_ board]
-    (println "x|x|o")
-    (println " |x| ")
-    (println "o|o|x")))
+    (let [symbol-for #(cond (= :x %) "x" (= :o %) "o" :default " ")]
+      (do
+        (println (apply str (interpose "|" (map symbol-for (take 3 board)))))
+        (println (apply str (interpose "|" (map symbol-for (drop 3 (take 6 board))))))
+        (println (apply str (interpose "|" (map symbol-for (drop 6 board)))))))))
 

@@ -41,7 +41,14 @@
             (get-next-move (ConsoleUI.))))))))
 
   (context "RunnerUI"
-    (it "redraws the board"
+    (it "draws an empty board"
+      (should= (str " | | " "\n"
+                    " | | " "\n"
+                    " | | " "\n")
+        (with-out-str (redraw (ConsoleUI.) '(nil nil nil
+                                             nil nil nil
+                                             nil nil nil)))))
+    (it "draws a somewhat-filled board"
       (should= (str "x|x|o" "\n"
                     " |x| " "\n"
                     "o|o|x" "\n")
