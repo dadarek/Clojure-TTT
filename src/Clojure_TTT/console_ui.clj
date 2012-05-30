@@ -4,11 +4,11 @@
 (defrecord ConsoleUI []
   NextMoveUI
   (get-next-move [this]
+    (let [is-valid #(and (not= nil %) (> 10 %) (< 0 %))
+          try-read #(try (Integer/parseInt (read-line))
+                    (catch NumberFormatException e nil)) ]
     (loop [result nil]
-      (if (and (not= nil result)
-               (> 10 result)
-               (< 0 result))
+      (if (is-valid result)
         result
-      (recur (try (Integer/parseInt (read-line))
-                  (catch NumberFormatException e nil)))))))
+      (recur (try-read)))))))
 
