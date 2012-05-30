@@ -51,6 +51,21 @@
                              :o  :o  nil
                              :x  :x  nil))))
 
+  (it "scores a guaranteed-loss third-to-last move as -1"
+    (should= -1 (score :x 6 '(:o  :x  :o
+                              :x  :o  nil
+                              :x  nil nil))))
+
+  (it "scores a one-possible-win third-to-last move as 0"
+    (should= 0 (score :x 9 '(:o  :x  :o
+                             :x  :o  nil
+                             :x  nil nil))))
+
+  (it "scores a one-possible-win one-guaranteed-loss third-to-last move as -1"
+    (should= -1 (score :x 8 '(:o  :x  :o
+                              :x  :o  nil
+                              :x  nil nil))))
+
 )
 
 (run-specs)
