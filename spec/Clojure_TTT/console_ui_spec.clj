@@ -7,6 +7,8 @@
   (:use [speclj.core]))
 
 
+(defn repeat-string [times text] (apply str (repeat times text)))
+
 (describe "Console UI"
   (context "NextMoveUI"
     (it "Reads next square"
@@ -36,7 +38,7 @@
             (get-next-move (ConsoleUI.)))))))
 
     (it "Prints prompt until valid square is entered"
-      (should= (apply str (repeat 3 "Please select a square: "))
+      (should= (repeat-string 3 "Please select a square: ")
         (with-out-str (with-in-str "hi\nthere\n4"
           (should= 4
             (get-next-move (ConsoleUI.))))))))
@@ -59,7 +61,7 @@
   (context "LoopUI"
     (context "play-again?"
       (it "Prints message to console"
-        (should= (apply str (repeat 3 "Would you like to play again?\n"))
+        (should= (repeat-string 3 "Would you like to play again?\n")
           (with-out-str (with-in-str "b\nb\ny"
             (do (play-again? (ConsoleUI.)))))))
 
@@ -72,12 +74,12 @@
           (should= false (play-again? (ConsoleUI.))))))
 
       (it "Ignores bogus values"
-        (with-out-str (with-in-str "1\n7\nfjfj\nyn\ny"
+        (with-out-str (with-in-str "1\n7\nMichael Jackson\nyn\ny"
           (should= true (play-again? (ConsoleUI.))))))
 
     (context "go-first?"
       (it "Prints message to console"
-        (should= (apply str (repeat 3 "Would you like to go first?\n"))
+        (should= (repeat-string 3 "Would you like to go first?\n")
           (with-out-str (with-in-str "b\nb\ny"
             (do (go-first? (ConsoleUI.)))))))
 
@@ -90,7 +92,7 @@
           (should= false (go-first? (ConsoleUI.))))))
 
       (it "Ignores bogus values"
-        (with-out-str (with-in-str "1\n7\nfjfj\nyn\ny"
+        (with-out-str (with-in-str "533\nx\nOsama Bin Laden\nyn\ny"
           (should= true (go-first? (ConsoleUI.))))))))))
 
 (run-specs)
