@@ -1,5 +1,6 @@
 (ns clojure_ttt.console_ui
   (:use clojure_ttt.runner)
+  (:use clojure_ttt.game_loop)
   (:use clojure_ttt.human_player))
 
 (defrecord ConsoleUI []
@@ -15,6 +16,7 @@
         (if (is-valid result)
           result
           (recur))))))
+
   RunnerUI
   (redraw [_ board]
     (let [symbol-for #(cond (= :x %) "x" (= :o %) "o" :default " ")
@@ -25,5 +27,7 @@
       (do
         (println (format-row row-1))
         (println (format-row row-2))
-        (println (format-row row-3))))))
+        (println (format-row row-3)))))
+  LoopUI
+  (play-again? [_] true))
 

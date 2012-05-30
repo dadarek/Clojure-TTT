@@ -1,6 +1,7 @@
 (ns clojure_ttt.console_ui-spec
   (:use clojure_ttt.human_player)
   (:use clojure_ttt.runner)
+  (:use clojure_ttt.game_loop)
   (:use clojure_ttt.console_ui)
   (:import [clojure_ttt.console_ui ConsoleUI])
   (:use [speclj.core]))
@@ -8,7 +9,7 @@
 
 (describe "Console UI"
   (context "NextMoveUI"
-    (it "Reads console input"
+    (it "Reads next square"
       (with-out-str (with-in-str "5"
         (should= 5
           (get-next-move (ConsoleUI.))))))
@@ -54,6 +55,10 @@
                     "o|o|x" "\n")
         (with-out-str (redraw (ConsoleUI.) '(:x  :x  :o
                                             nil :x  nil
-                                            :o  :o  :x)))))))
+                                            :o  :o  :x))))))
+  (context "LoopUI"
+    (it "Reads 'yes' values"
+      (with-in-str "y"
+        (should= true (play-again? (ConsoleUI.)))))))
 
 (run-specs)
