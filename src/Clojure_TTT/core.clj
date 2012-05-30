@@ -14,5 +14,5 @@
 
 
 (defn -main []
-  (run human computer)
+  (run human computer ui)
 )

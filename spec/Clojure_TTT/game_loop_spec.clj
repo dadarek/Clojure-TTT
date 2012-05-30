@@ -1,18 +1,18 @@
-(ns clojure_ttt.game-spec
-  (:use [clojure_ttt.game])
+(ns clojure_ttt.game_loop-spec
+  (:use [clojure_ttt.game_loop])
   (:use [speclj.core]))
 
-(deftype MockUI []
-  GameUI
+(deftype MockLoopUI []
+  LoopUI
   (play-again? [x]
     (print "1")
     (= "y" (read-line))))
 
-(describe "Game"
+(describe "Game Loop"
   (it "Plays until user enters 'n'"
     (should= "1111"
       (with-out-str (with-in-str "y\ny\ny\nn"
-        (play (MockUI.)))))))
+        (play (MockLoopUI.)))))))
 
 (run-specs)
 

@@ -1,6 +1,6 @@
-(ns clojure_ttt.game)
+(ns clojure_ttt.game_loop)
 
-(defprotocol GameUI
+(defprotocol LoopUI
   (play-again? [ui]))
 
 (defn play [ui]
