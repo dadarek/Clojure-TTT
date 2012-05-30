@@ -10,8 +10,11 @@
 
 (describe "Computer"
   (it "returns best scoring move from minimax"
-    (with-redefs [score (fn [& args] '(1 3 2))]
-      (should= 2 (next-move computer nil))))
+    (let [board '(:x  :o nil
+                  nil :x :x
+                  nil :o :o)]
+      (with-redefs [score (fn [& args] '(1 3 2))]
+        (should= 4 (next-move computer board)))))
 
   (it "returns first square if several have high score"
     (with-redefs [score (fn [& args] '(3 3 2))]
@@ -27,9 +30,19 @@
           Exception "#{3 4 6 7 9}"
           (next-move computer board)))))
 
+  (it "passes board into minimax"
+    (let [board '(:x  :o nil
+                  nil :x nil
+                  nil :o nil)]
+      (with-redefs [score (fn [moves context & args]
+                            (throw (Exception. (str (:board context)))))]
+        (should-throw
+          Exception (str board)
+          (next-move computer board)))))
+
   (it "passes in its symbol to minimax"
-    (with-redefs [score (fn [moves player & args]
-                          (throw (Exception. (str player))))]
+    (with-redefs [score (fn [moves context & args]
+                          (throw (Exception. (str (:player context)))))]
       (should-throw
         Exception (str :o)
         (next-move computer nil))))

@@ -7,8 +7,9 @@
 (defrecord Computer [x-or-o]
   Player
   (next-move [player board]
-    (let [empty-squares (get-empty-squares board)
-          scores (score empty-squares x-or-o
+    (let [possible-moves (get-empty-squares board)
+          context {:board board :player x-or-o}
+          scores (score possible-moves context
                         wins? ties? next-context)
           top-score (reduce max scores)]
       (inc (.indexOf scores top-score))
