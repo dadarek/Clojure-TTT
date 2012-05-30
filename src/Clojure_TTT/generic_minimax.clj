@@ -9,6 +9,6 @@
             (cond
               (wins? move context) 1
               (ties? move context) 0
-              :else (- (reduce + (score-child-moves-of move)))))]
+              :else (- (reduce max (score-child-moves-of move)))))]
     (map score-single-move moves)))
 
