@@ -4,10 +4,19 @@
   (:import [clojure_ttt.human_player HumanPlayer])
   (:use [speclj.core]))
 
-(def player (HumanPlayer. :o))
+
+(defrecord DummyUI [move]
+  NextMoveUI
+  (get-next-move [this] move))
+
 
 (describe "Human Player"
-  (it "Compiles"
-    (should= 5 (next-move player nil))))
+  (it "Listens to UI"
+    (should= 5 
+      (next-move (HumanPlayer. (DummyUI. 5)) nil)))
+
+  (it "Doesn't simply return 5"
+    (should= 8 
+      (next-move (HumanPlayer. (DummyUI. 8)) nil))))
 
 (run-specs)

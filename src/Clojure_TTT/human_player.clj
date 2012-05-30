@@ -1,7 +1,10 @@
 (ns clojure_ttt.human_player
   (:use clojure_ttt.runner))
 
+(defprotocol NextMoveUI
+  (get-next-move [ui]))
+
 (defrecord HumanPlayer [ui]
   Player
-  (next-move [player board] 5))
+  (next-move [player board] (get-next-move ui)))
 
