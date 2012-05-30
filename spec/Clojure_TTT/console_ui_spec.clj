@@ -24,6 +24,13 @@
   (it "Ignores values < 1"
     (with-in-str "0\n-2\n1"
       (should= 1
-        (get-next-move (ConsoleUI.))))))
+        (get-next-move (ConsoleUI.)))))
+
+  (it "Prints prompt"
+    (should= "Please select a square: "
+      (with-out-str
+        (with-in-str "1"
+          (should= 1
+            (get-next-move (ConsoleUI.))))))))
 
 (run-specs)

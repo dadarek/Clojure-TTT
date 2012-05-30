@@ -7,6 +7,7 @@
     (let [is-valid #(and (not= nil %) (> 10 %) (< 0 %))
           try-read #(try (Integer/parseInt (read-line))
                     (catch NumberFormatException e nil)) ]
+    (print "Please select a square: ")
     (loop [result nil]
       (if (is-valid result)
         result
