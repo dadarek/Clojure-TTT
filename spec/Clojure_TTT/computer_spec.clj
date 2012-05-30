@@ -9,11 +9,11 @@
 (def computer (Computer. :o))
 
 (describe "Computer"
-  (it "Returns best scoring moving from minimax"
+  (it "returns best scoring move from minimax"
     (with-redefs [score (fn [& args] '(1 3 2))]
       (should= 2 (next-move computer nil))))
 
-  (it "Returns first square if several have high score"
+  (it "returns first square if several have high score"
     (with-redefs [score (fn [& args] '(3 3 2))]
       (should= 1 (next-move (Computer. :o) nil))))
 
