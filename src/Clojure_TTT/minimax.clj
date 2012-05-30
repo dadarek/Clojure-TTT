@@ -16,9 +16,11 @@
   (def new-board (take-square square {:board board :player player}))
   (def opponent (if (= :x player) :o :x))
   (def empty-squares (get-empty-squares new-board))
+  (def opponents-score (fn [square] (score opponent square new-board)))
+  (def opponents-best (fn [] (reduce max (map opponents-score empty-squares))))
 
   (cond
     (won? new-squares) 1
     (full? new-board) 0
-    :else (- (score opponent (first empty-squares) new-board)))
+    :else (- (opponents-best)))
 )

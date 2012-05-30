@@ -39,6 +39,18 @@
     (should= 0 (score :x 9 '(:o  :x  :o
                              :x  :o  nil
                              :x  :o  nil))))
+
+          ; look at this one
+  (it "scores a guaranteed-win third-to-last move as 1"
+    (should= 1 (score :x 9 '(:x  :o  nil
+                             :o  :o  nil
+                             :x  :x  nil))))
+
+  (it "scores a possible-win third-to-last move as 0"
+    (should= 0 (score :x 6 '(:x  :o  nil
+                             :o  :o  nil
+                             :x  :x  nil))))
+
 )
 
 (run-specs)
