@@ -60,7 +60,16 @@
                           (ref-set ref-p2 p2)))]
         (do (play "Human" "Computer" ui)))
       (should= "Computer" @ref-p1)
-      (should= "Human" @ref-p2))))
+      (should= "Human" @ref-p2))
+
+    (it "Passes the UI into the play method"
+      (def ref-ui (ref nil))
+      (def ui (MockLoopUI. (ref 0) [false]
+                           (ref 0) [false]))
+      (with-redefs [run (fn [_ _ ui]
+                          (dosync (ref-set ref-ui ui)))]
+        (do (play nil nil ui)))
+      (should= ui @ref-ui))))
 
 (run-specs)
 

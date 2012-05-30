@@ -8,8 +8,8 @@
 (defn play [human computer ui]
   (loop []
     (if (go-first? ui)
-      (run human computer)
-      (run computer human))
+      (run human computer ui)
+      (run computer human ui))
     (if (play-again? ui)
        (recur))))
 
