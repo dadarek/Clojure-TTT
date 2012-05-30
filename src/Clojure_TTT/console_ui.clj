@@ -1,4 +1,5 @@
 (ns clojure_ttt.console_ui
+  (:use clojure_ttt.runner)
   (:use clojure_ttt.human_player))
 
 (defrecord ConsoleUI []
@@ -13,5 +14,10 @@
       (let [result (try-read)]
         (if (is-valid result)
           result
-          (recur)))))))
+          (recur))))))
+  RunnerUI
+  (redraw [_ board]
+    (println "x|x|o")
+    (println " |x| ")
+    (println "o|o|x")))
 
