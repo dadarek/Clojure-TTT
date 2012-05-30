@@ -22,5 +22,7 @@
   (cond
     (won? new-squares) 1
     (full? new-board) 0
-    :else (- (opponents-best)))
-)
+    :else (- (opponents-best))))
+
+(defn next-move [player board] 9)
+
