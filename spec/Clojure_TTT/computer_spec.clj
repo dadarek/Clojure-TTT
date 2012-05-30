@@ -34,12 +34,12 @@
 
   (it "injects correct functions to minimax"
     (with-redefs
-      [score (fn [moves player wins? ties? next-context]
-        (if (not= wins? mmi/wins?) (throw (Exception. "Invalid wins? fn.")))
-        (if (not= ties? mmi/ties?) (throw (Exception. "Invalid ties? fn.")))
-        (if (not= next-context mmi/next-context) (throw (Exception. "Invalid next-context fn.")))
-
-        (throw (Exception. "All Good")))]
+      [score
+        (fn [moves player wins? ties? next-context]
+          (if (not= wins? mmi/wins?) (throw (Exception. "Invalid wins? fn.")))
+          (if (not= ties? mmi/ties?) (throw (Exception. "Invalid ties? fn.")))
+          (if (not= next-context mmi/next-context) (throw (Exception. "Invalid next-context fn.")))
+          (throw (Exception. "All Good")))]
       (should-throw
         Exception "All Good"
         (next-move (Computer. :john) nil)))))
