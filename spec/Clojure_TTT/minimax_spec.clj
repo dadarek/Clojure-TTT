@@ -40,7 +40,7 @@
                              :x  :o  nil
                              :x  :o  nil))))
 
-          ; look at this one
+  ;TODO: look at this one
   (it "scores a guaranteed-win third-to-last move as 1"
     (should= 1 (score :x 9 '(:x  :o  nil
                              :o  :o  nil
