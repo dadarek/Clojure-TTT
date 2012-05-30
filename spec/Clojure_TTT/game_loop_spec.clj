@@ -11,6 +11,7 @@
     (let [result (nth responses @play-again-counter)]
       (inc-counter play-again-counter)
       result))
+
   (go-first? [_]
     (let [result (nth responses @go-first-counter)]
       (inc-counter go-first-counter)
