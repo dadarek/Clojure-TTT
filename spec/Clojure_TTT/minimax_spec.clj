@@ -29,6 +29,11 @@
     (should= 0 (score :x 2 '(:o  nil :o
                              :x  :o  :x
                              :x  :o  :x))))
+
+  (it "scores a losing, second-to-last move as -1"
+    (should= -1 (score :x 6 '(:o  :x  :o
+                             :x  :o  nil
+                             :x  :o  nil))))
 )
 
 (run-specs)

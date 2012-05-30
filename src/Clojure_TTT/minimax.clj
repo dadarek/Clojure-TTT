@@ -12,6 +12,11 @@
 
 (defn score [player square board]
   (def new-squares (conj (player-squares board player) square))
+  (def new-board (take-square square {:board board :player player}))
+  (def opponent (if (= :x player) :o :x))
 
-  (if (won? new-squares) 1 0)
+  (cond
+    (won? new-squares) 1
+    (full? new-board) 0
+    :else -1)
 )
