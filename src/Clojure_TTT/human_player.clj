@@ -1,7 +1,7 @@
-(ns clojure_ttt.ui_player
+(ns clojure_ttt.human_player
   (:use clojure_ttt.runner))
 
-(defrecord UIPlayer [x-or-o]
+(defrecord HumanPlayer [ui]
   Player
   (next-move [player board] 5))
 
