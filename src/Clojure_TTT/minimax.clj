@@ -32,8 +32,8 @@
   (if (is-empty? board)
     1
     (let [empty-squares (get-empty-squares board)
-          all-scores (map #(score player % board) empty-squares)
-          their-scores (reduce max all-scores)
-          their-scores-index (.indexOf all-scores their-scores)]
-      (nth (apply list empty-squares) their-scores-index))))
+          their-scores (map #(score player % board) empty-squares)
+          top-score (reduce max their-scores)
+          top-score-index (.indexOf their-scores top-score)]
+      (nth (apply list empty-squares) top-score-index))))
 
