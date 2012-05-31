@@ -3,7 +3,9 @@
   (:use [clojure_ttt.rules]))
 
 (defprotocol RunnerUI
-  (redraw [this board]))
+  (redraw [this board])
+  (announce-next-turn [this player])
+  (announce-next-move-taken [this player move]))
 
 (defprotocol Player
   (next-move [player x-or-o board]))
@@ -21,9 +23,11 @@
           board
           (do
             (redraw ui board)
+            (announce-next-turn ui (symbol-for current-player))
             (let [next-move (next-move current-player (symbol-for current-player) board)]
               (if (square-taken? next-move)
                 (recur board current-player)
                 (let [new-board (take-square next-move {:board board :player (symbol-for current-player)})]
-              (recur new-board (next-player)))))))))))
+                  (announce-next-move-taken ui (symbol-for current-player) next-move)
+                  (recur new-board (next-player)))))))))))
 
