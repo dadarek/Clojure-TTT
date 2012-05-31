@@ -39,6 +39,12 @@
         (println (format-row row-2))
         (println (format-row row-3)))))
 
+  (announce-next-turn [_ player]
+    (println (str "Player " (symbol-for player) " - it is your turn next")))
+
+  (announce-next-move-taken [_ player square]
+    (println (str "Player " (symbol-for player) " takes square " square)))
+
   (announce-winner [_ winner]
     (println (str (symbol-for winner) " wins!")))
 

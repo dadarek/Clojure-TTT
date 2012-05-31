@@ -65,7 +65,13 @@
       (should= "O wins!\n" (with-out-str (announce-winner (ConsoleUI.) :o))))
 
     (it "Announces ties"
-      (should= "Game tied ...\n" (with-out-str (announce-tie (ConsoleUI.))))))
+      (should= "Game tied ...\n" (with-out-str (announce-tie (ConsoleUI.)))))
+
+    (it "Announces next turn"
+      (should= "Player X - it is your turn next\n" (with-out-str (announce-next-turn (ConsoleUI.) :x))))
+
+    (it "Announces move taken"
+      (should= "Player X takes square 5\n" (with-out-str (announce-next-move-taken (ConsoleUI.) :x 5)))))
 
   (context "LoopUI"
     (context "play-again?"
