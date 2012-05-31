@@ -25,12 +25,15 @@
         :else (- (opponents-best)))))
   )
 
+(defn is-empty? [board]
+  (= 9 (count (get-empty-squares board))))
+
 (defn next-move [player board]
-  (let [empty-squares (get-empty-squares board)]
-    (if (= 9 (count empty-squares))
-      1
-      (let [all-scores (map #(score player % board) empty-squares)
-        their-scores (reduce max all-scores)
-        their-scores-index (.indexOf all-scores their-scores)]
-        (nth (apply list empty-squares) their-scores-index)))))
+  (if (is-empty? board)
+    1
+    (let [empty-squares (get-empty-squares board)
+          all-scores (map #(score player % board) empty-squares)
+          their-scores (reduce max all-scores)
+          their-scores-index (.indexOf all-scores their-scores)]
+      (nth (apply list empty-squares) their-scores-index))))
 
