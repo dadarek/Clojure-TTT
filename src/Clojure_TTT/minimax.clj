@@ -11,22 +11,22 @@
   (some #(subset? % squares) winning-combinations))
 
 (defn score [player square board]
-  (def current-squares (player-squares board player))
-  (def new-squares (conj current-squares square))
-  (def new-board (take-square square {:board board :player player}))
-  (def opponent (if (= :x player) :o :x))
-  (def empty-squares (get-empty-squares new-board))
-  (def opponents-score (fn [square] (score opponent square new-board)))
-  (def opponents-best (fn [] (reduce max (map opponents-score empty-squares))))
-
-  (cond
-    (won? new-squares) 1
-    (full? new-board) 0
-    :else (- (opponents-best))))
+  (let [current-squares (player-squares board player)
+        new-squares (conj current-squares square)
+        new-board (take-square square {:board board :player player})
+        opponent (if (= :x player) :o :x)
+        empty-squares (get-empty-squares new-board)
+        opponents-score (fn [square] (score opponent square new-board))
+        opponents-best (fn [] (reduce max (map opponents-score empty-squares)))]
+    (cond
+      (won? new-squares) 1
+      (full? new-board) 0
+      :else (- (opponents-best)))))
 
 (defn next-move [player board]
-  (def all-scores (map #(score player % board) (get-empty-squares board)))
-  (def top-score (reduce max all-scores))
-  (def top-score-index (.indexOf all-scores top-score))
-  (nth (apply list (get-empty-squares board)) top-score-index))
+  (let [empty-squares (get-empty-squares board)
+        all-scores (map #(score player % board) empty-squares)
+        their-scores (reduce max all-scores)
+        their-scores-index (.indexOf all-scores their-scores)]
+    (nth (apply list empty-squares) their-scores-index)))
 
