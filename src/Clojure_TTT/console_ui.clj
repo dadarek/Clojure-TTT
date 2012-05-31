@@ -3,6 +3,9 @@
   (:use clojure_ttt.game_loop)
   (:use clojure_ttt.human_player))
 
+(defn symbol-for [player]
+  (cond (= :x player) "X" (= :o player) "O" :default " "))
+
 (defn prompt [message]
   (loop [result nil]
     (if (or (= "y" result) (= "n" result))
@@ -27,8 +30,7 @@
 
   RunnerUI
   (redraw [_ board]
-    (let [symbol-for #(cond (= :x %) "x" (= :o %) "o" :default " ")
-          row-1 (take 3 board)
+    (let [row-1 (take 3 board)
           row-2 (drop 3 (take 6 board))
           row-3 (drop 6 board)
           format-row #(apply str (interpose "|" (map symbol-for %)))]
