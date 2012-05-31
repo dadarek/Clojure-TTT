@@ -18,13 +18,17 @@
   RunnerUI
   (redraw [_ _] true)
   (announce-next-turn [_ _] true)
-  (announce-next-move-taken [_ _ _] true))
+  (announce-next-move-taken [_ _ _] true)
+  (announce-tie [_] true)
+  (announce-winner [_ _] true))
 
-(defrecord CountingUI [redraw-counter next-turn-counter next-move-counter]
+(defrecord CountingUI [redraw-counter next-turn-counter next-move-counter tie-counter winner-counter]
   RunnerUI
   (redraw [_ board] (increment-counter redraw-counter))
   (announce-next-turn [_ player] (increment-counter next-turn-counter))
   (announce-next-move-taken [_ player move] (increment-counter next-move-counter))
+  (announce-tie [_] (increment-counter tie-counter))
+  (announce-winner [_ player] (increment-counter winner-counter))
 )
 
 (describe "Game Runner"
@@ -62,6 +66,24 @@
       (should= 6 @redraw-counter)
       (should= 6 @next-turn-counter)
       (should= 6 @next-move-counter)))
+
+  (it "Announces ties"
+    (let [tie-counter (ref 0)
+          winner-counter (ref 0)]
+      (run (MockPlayer. '(1 2 6 7 8) (ref nil) (ref 0))
+           (MockPlayer. '(3 4 5 9) (ref nil) (ref 0))
+           (CountingUI. nil nil nil tie-counter winner-counter))
+      (should= 1 @tie-counter)
+      (should= 0 @winner-counter)))
+
+  (it "Announces Winner"
+    (let [tie-counter (ref 0)
+          winner-counter (ref 0)]
+      (run (MockPlayer. '(1 2 3) (ref nil) (ref 0))
+           (MockPlayer. '(4 5) (ref nil) (ref 0))
+           (CountingUI. nil nil nil tie-counter winner-counter))
+      (should= 0 @tie-counter)
+      (should= 1 @winner-counter)))
 
   (it "Tells first player he's 'x', second player he's 'o'"
     (let [x-ref (ref nil)

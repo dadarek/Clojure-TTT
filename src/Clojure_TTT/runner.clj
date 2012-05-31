@@ -5,7 +5,9 @@
 (defprotocol RunnerUI
   (redraw [this board])
   (announce-next-turn [this player])
-  (announce-next-move-taken [this player move]))
+  (announce-next-move-taken [this player move])
+  (announce-tie [this])
+  (announce-winner [this player]))
 
 (defprotocol Player
   (next-move [player x-or-o board]))
@@ -19,9 +21,17 @@
       (let [won? #(winner? (player-squares board %))
             square-taken? #(not= nil (nth board (dec %)))
             next-player #(if (= x current-player) o x)]
-        (if (or (full? board) (won? :x) (won? :o))
-          board
-          (do
+        (cond
+          (full? board) (do
+                          (announce-tie ui)
+                          board)
+          (won? :x) (do
+                      (announce-winner ui :x)
+                      board)
+          (won? :o) (do
+                      (announce-winner ui :o)
+                       board)
+          :else (do
             (redraw ui board)
             (announce-next-turn ui (symbol-for current-player))
             (let [next-move (next-move current-player (symbol-for current-player) board)]
