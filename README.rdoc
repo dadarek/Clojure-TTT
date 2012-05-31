@@ -15,11 +15,9 @@ https://github.com/technomancy/leiningen
 Once you have Java and Leiningent installed, you must do the following:
 
 1. Run the following to get dependencies installed (you only need to do this once):
-  
   lein deps
 
 2. Run the following to run the specs:
-
   lein spec
 
 == Running The Game
@@ -28,12 +26,10 @@ Sometimes your application goes wrong. Fortunately there are a lot of tools that
 Once you have Java and Leiningent installed, you must do the following:
 
 1. Run the following to get dependencies installed (you only need to do this once):
-  
   lein deps
 
-2. Run the following to run the specs:
-
-  lein spec
+2. Run the following to play the game:
+  lein trampoline run
 
 
 == Enjoying the Game
