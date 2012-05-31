@@ -59,10 +59,13 @@
                                             nil :x  nil
                                             :o  :o  :x)))))
     (it "Announces winner"
-      (should= "X wins!" (announce-winner (ConsoleUI.) :x)))
+      (should= "X wins!\n" (with-out-str (announce-winner (ConsoleUI.) :x))))
 
     (it "Announces both winners"
-      (should= "O wins!" (announce-winner (ConsoleUI.) :o))))
+      (should= "O wins!\n" (with-out-str (announce-winner (ConsoleUI.) :o))))
+
+    (it "Announces ties"
+      (should= "Game tied ...\n" (with-out-str (announce-tie (ConsoleUI.))))))
 
   (context "LoopUI"
     (context "play-again?"

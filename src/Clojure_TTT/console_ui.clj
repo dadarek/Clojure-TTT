@@ -38,7 +38,9 @@
         (println (format-row row-3)))))
 
   (announce-winner [_ winner]
-    (str (if (= :x winner) "X" "O") " wins!"))
+    (println (str (if (= :x winner) "X" "O") " wins!")))
+
+  (announce-tie [_] (println "Game tied ..."))
 
   LoopUI
   (play-again? [_] (prompt "Would you like to play again?"))
