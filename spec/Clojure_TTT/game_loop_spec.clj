@@ -20,20 +20,21 @@
       (inc-counter go-first-counter)
       result)))
 
-(with-redefs [run (fn [& args] true)]
   (describe "Game Loop"
     (it "Plays until play-again returns false"
       (def counter (ref 0))
       (def ui (MockLoopUI. counter [true true true false]
                            (ref 0) [true true true true]))
-      (do (play nil nil ui))
+      (with-redefs [run (fn [& args] true)]
+        (do (play nil nil ui)))
       (should= 4 @counter))
 
     (it "Asks if player wants to go first"
       (def counter (ref 0))
       (def ui (MockLoopUI. counter [true true false]
                            (ref 0) [true true true]))
-      (do (play nil nil ui))
+      (with-redefs [run (fn [& args] true)]
+        (do (play nil nil ui)))
       (should= 3 @counter))
 
     (it "Lets human go first if he wants to"
@@ -69,7 +70,7 @@
       (with-redefs [run (fn [_ _ ui]
                           (dosync (ref-set ref-ui ui)))]
         (do (play nil nil ui)))
-      (should= ui @ref-ui))))
+      (should= ui @ref-ui)))
 
 (run-specs)
 
