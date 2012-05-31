@@ -37,6 +37,9 @@
         (println (format-row row-2))
         (println (format-row row-3)))))
 
+  (announce-winner [_ winner]
+    (str (if (= :x winner) "X" "O") " wins!"))
+
   LoopUI
   (play-again? [_] (prompt "Would you like to play again?"))
   (go-first? [_] (prompt "Would you like to go first?")))

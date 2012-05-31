@@ -57,7 +57,13 @@
                     "o|o|x" "\n")
         (with-out-str (redraw (ConsoleUI.) '(:x  :x  :o
                                             nil :x  nil
-                                            :o  :o  :x))))))
+                                            :o  :o  :x)))))
+    (it "Announces winner"
+      (should= "X wins!" (announce-winner (ConsoleUI.) :x)))
+
+    (it "Announces both winners"
+      (should= "O wins!" (announce-winner (ConsoleUI.) :o))))
+
   (context "LoopUI"
     (context "play-again?"
       (it "Prints message to console"
