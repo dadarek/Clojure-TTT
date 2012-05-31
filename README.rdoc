@@ -36,5 +36,7 @@ Once you have Java and Leiningent installed, you must do the following:
   lein spec
 
 
-Enjoy!
+== Enjoying the Game
+
+Play, tie (or lose), and repeat.
 
