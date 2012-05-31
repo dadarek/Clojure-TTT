@@ -75,9 +75,7 @@
     (it "selects the correct winning next move" do
       (should= 3 (next-move :x '(:x  :x  nil
                                  :o  :o  nil
-                                 nil nil nil))))
-  )
-)
+                                 nil nil nil))))))
 
 (run-specs)
 
