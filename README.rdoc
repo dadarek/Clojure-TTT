@@ -1,0 +1,40 @@
+== Clojure Tic Tac Toe
+
+Console-based game of Tic-Tac-Toe.  Go ahead, try'n beat me!
+
+
+== Prerequisites
+
+1. You will need Java installed.
+
+2. You will need Leiningen.  You can get him here: 
+https://github.com/technomancy/leiningen
+
+== Running Specs
+
+Once you have Java and Leiningent installed, you must do the following:
+
+1. Run the following to get dependencies installed (you only need to do this once):
+  
+  lein deps
+
+2. Run the following to run the specs:
+
+  lein spec
+
+== Running The Game
+
+Sometimes your application goes wrong. Fortunately there are a lot of tools that
+Once you have Java and Leiningent installed, you must do the following:
+
+1. Run the following to get dependencies installed (you only need to do this once):
+  
+  lein deps
+
+2. Run the following to run the specs:
+
+  lein spec
+
+
+Enjoy!
+
