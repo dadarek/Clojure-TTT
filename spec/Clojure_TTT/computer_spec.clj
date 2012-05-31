@@ -4,7 +4,7 @@
   (:import [clojure_ttt.computer Computer])
   (:use [speclj.core]))
 
-(def computer (Computer. :o))
+(def computer (Computer.))
 
 (describe "Computer"
   (it "passes board into minimax"
@@ -15,13 +15,13 @@
                             (throw (Exception. (str board))))]
         (should-throw
           Exception (str board)
-          (next-move computer board)))))
+          (next-move computer nil board)))))
 
   (it "passes in its symbol to minimax"
     (with-redefs [clojure_ttt.minimax/next-move (fn [sym _]
                           (throw (Exception. (str sym))))]
       (should-throw
-        Exception (str :o)
-        (next-move computer nil)))))
+        Exception (str :hello)
+        (next-move computer :hello nil)))))
 
 (run-specs)

@@ -6,5 +6,5 @@
 
 (defrecord HumanPlayer [ui]
   Player
-  (next-move [player board] (get-next-move ui)))
+  (next-move [player _ board] (get-next-move ui)))
 

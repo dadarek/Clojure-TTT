@@ -13,10 +13,10 @@
 (describe "Human Player"
   (it "Listens to UI"
     (should= 5 
-      (next-move (HumanPlayer. (DummyUI. 5)) nil)))
+      (next-move (HumanPlayer. (DummyUI. 5)) nil nil)))
 
   (it "Doesn't simply return 5"
     (should= 8 
-      (next-move (HumanPlayer. (DummyUI. 8)) nil))))
+      (next-move (HumanPlayer. (DummyUI. 8)) nil nil))))
 
 (run-specs)

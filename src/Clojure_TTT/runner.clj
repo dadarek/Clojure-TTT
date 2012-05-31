@@ -6,7 +6,7 @@
   (redraw [this board]))
 
 (defprotocol Player
-  (next-move [player board]))
+  (next-move [player x-or-o board]))
 
 (def empty-board '(nil nil nil nil nil nil nil nil nil))
 
@@ -21,7 +21,7 @@
           board
           (do
             (redraw ui board)
-            (let [next-move (next-move current-player board)]
+            (let [next-move (next-move current-player (symbol-for current-player) board)]
               (if (square-taken? next-move)
                 (recur board current-player)
                 (let [new-board (take-square next-move {:board board :player (symbol-for current-player)})]
