@@ -1,8 +1,6 @@
 (ns clojure_ttt.computer-spec
   (:use clojure_ttt.runner)
   (:use clojure_ttt.computer)
-  (:use clojure_ttt.generic_minimax)
-  (:use [clojure_ttt.minimax_injections :as mmi])
   (:import [clojure_ttt.computer Computer])
   (:use [speclj.core]))
 
