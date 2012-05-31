@@ -23,12 +23,15 @@
             next-player #(if (= x current-player) o x)]
         (cond
           (full? board) (do
+                          (redraw ui board)
                           (announce-tie ui)
                           board)
           (won? :x) (do
+                      (redraw ui board)
                       (announce-winner ui :x)
                       board)
           (won? :o) (do
+                      (redraw ui board)
                       (announce-winner ui :o)
                        board)
           :else (do

@@ -57,15 +57,27 @@
                    (DummyUI.))))
 
   (it "Notifies UI on each turn."
-    (let [redraw-counter (ref 0)
-          next-turn-counter (ref 0)
+    (let [next-turn-counter (ref 0)
           next-move-counter (ref 0)]
       (run (MockPlayer. '(1 3 8) (ref nil) (ref 0))
            (MockPlayer. '(6 4 5) (ref nil) (ref 0))
-           (CountingUI. redraw-counter next-turn-counter next-move-counter nil nil))
-      (should= 6 @redraw-counter)
+           (CountingUI. nil next-turn-counter next-move-counter nil nil))
       (should= 6 @next-turn-counter)
       (should= 6 @next-move-counter)))
+
+  (it "Redraws board on each turn plus on tie"
+    (let [redraw-counter (ref 0)]
+      (run (MockPlayer. '(1 2 6 7 8) (ref nil) (ref 0))
+           (MockPlayer. '(3 4 5 9) (ref nil) (ref 0))
+           (CountingUI. redraw-counter nil nil nil nil))
+      (should= 10 @redraw-counter)))
+
+  (it "Redraws board on each turn plus when someone wins"
+    (let [redraw-counter (ref 0)]
+      (run (MockPlayer. '(1 3 8) (ref nil) (ref 0))
+           (MockPlayer. '(6 4 5) (ref nil) (ref 0))
+           (CountingUI. redraw-counter nil nil nil nil))
+      (should= 7 @redraw-counter)))
 
   (it "Announces ties"
     (let [tie-counter (ref 0)
