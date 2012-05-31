@@ -67,12 +67,17 @@
                                  nil nil nil
                                  nil nil nil))))
 
-    (it "selects the correct blocking next move" do
+    (it "selects the correct blocking next move"
       (should= 9 (next-move :x '(:o  :x  :o
                                  :x  :o  nil
                                  :x  nil nil))))
 
-    (it "selects the correct winning next move" do
+    (it "makes the correct second move"
+      (should= 5 (next-move :o '(:x  nil nil
+                                 nil nil nil
+                                 nil nil nil))))
+
+    (it "selects the correct winning next move"
       (should= 3 (next-move :x '(:x  :x  nil
                                  :o  :o  nil
                                  nil nil nil))))))
