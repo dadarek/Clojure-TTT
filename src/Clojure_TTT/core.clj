@@ -11,7 +11,7 @@
 
 (def ui (ConsoleUI.))
 (def human (HumanPlayer. ui))
-(def computer (Computer. :x))
+(def computer (Computer.))
 
 
 (defn -main []
