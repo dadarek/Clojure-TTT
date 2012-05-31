@@ -26,9 +26,11 @@
   )
 
 (defn next-move [player board]
-  (let [empty-squares (get-empty-squares board)
-        all-scores (map #(score player % board) empty-squares)
+  (let [empty-squares (get-empty-squares board)]
+    (if (= 9 (count empty-squares))
+      1
+      (let [all-scores (map #(score player % board) empty-squares)
         their-scores (reduce max all-scores)
         their-scores-index (.indexOf all-scores their-scores)]
-    (nth (apply list empty-squares) their-scores-index)))
+        (nth (apply list empty-squares) their-scores-index)))))
 
