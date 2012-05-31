@@ -37,7 +37,8 @@
       (do
         (println (format-row row-1))
         (println (format-row row-2))
-        (println (format-row row-3)))))
+        (println (format-row row-3))
+        (println))))
 
   (announce-next-turn [_ player]
     (println (str "Player " (symbol-for player) " - it is your turn next")))

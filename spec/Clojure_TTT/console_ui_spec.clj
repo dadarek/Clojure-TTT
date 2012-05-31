@@ -47,14 +47,14 @@
     (it "draws an empty board"
       (should= (str " | | " "\n"
                     " | | " "\n"
-                    " | | " "\n")
+                    " | | " "\n\n")
         (with-out-str (redraw (ConsoleUI.) '(nil nil nil
                                              nil nil nil
                                              nil nil nil)))))
     (it "draws a somewhat-filled board"
       (should= (str "X|X|O" "\n"
                     " |X| " "\n"
-                    "O|O|X" "\n")
+                    "O|O|X" "\n\n")
         (with-out-str (redraw (ConsoleUI.) '(:x  :x  :o
                                             nil :x  nil
                                             :o  :o  :x)))))
