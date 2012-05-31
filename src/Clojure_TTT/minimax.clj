@@ -24,5 +24,9 @@
     (full? new-board) 0
     :else (- (opponents-best))))
 
-(defn next-move [player board] 9)
+(defn next-move [player board]
+  (def all-scores (map #(score player % board) (get-empty-squares board)))
+  (def top-score (reduce max all-scores))
+  (def top-score-index (.indexOf all-scores top-score))
+  (nth (apply list (get-empty-squares board)) top-score-index))
 

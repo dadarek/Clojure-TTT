@@ -62,10 +62,20 @@
                                 :x  nil nil)))))
 
   (context "Next Move"
+    (it "makes the correct first move"
+      (should= 1 (next-move :x '(nil nil nil
+                                 nil nil nil
+                                 nil nil nil))))
+
     (it "selects the correct blocking next move" do
       (should= 9 (next-move :x '(:o  :x  :o
                                  :x  :o  nil
                                  :x  nil nil))))
+
+    (it "selects the correct winning next move" do
+      (should= 3 (next-move :x '(:x  :x  nil
+                                 :o  :o  nil
+                                 nil nil nil))))
   )
 )
 
