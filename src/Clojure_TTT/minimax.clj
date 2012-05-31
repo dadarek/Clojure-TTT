@@ -11,17 +11,19 @@
   (some #(subset? % squares) winning-combinations))
 
 (defn score [player square board]
-  (let [current-squares (player-squares board player)
-        new-squares (conj current-squares square)
-        new-board (take-square square {:board board :player player})
-        opponent (if (= :x player) :o :x)
-        empty-squares (get-empty-squares new-board)
-        opponents-score (fn [square] (score opponent square new-board))
-        opponents-best (fn [] (reduce max (map opponents-score empty-squares)))]
-    (cond
-      (won? new-squares) 1
-      (full? new-board) 0
-      :else (- (opponents-best)))))
+  (do
+    (let [current-squares (player-squares board player)
+          new-squares (conj current-squares square)
+          new-board (take-square square {:board board :player player})
+          opponent (if (= :x player) :o :x)
+          empty-squares (get-empty-squares new-board)
+          opponents-score (fn [square] (score opponent square new-board))
+          opponents-best (fn [] (reduce max (map opponents-score empty-squares)))]
+      (cond
+        (won? new-squares) 1
+        (full? new-board) 0
+        :else (- (opponents-best)))))
+  )
 
 (defn next-move [player board]
   (let [empty-squares (get-empty-squares board)
