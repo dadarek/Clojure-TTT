@@ -35,7 +35,8 @@
 
 (defn run [x o ui]
   (let [symbol-for #(if (= % x) :x :o)
-        get-next-player #(if (= x %) o x)]
+        get-next-player #(if (= x %) o x)
+        get-next-move (fn [board player] (next-move player (symbol-for player) board))]
     (loop [board empty-board
            current-player x]
       (if (game-over? board)
@@ -43,7 +44,7 @@
         (do
           (redraw ui board)
           (announce-next-turn ui (symbol-for current-player))
-          (let [next-move (next-move current-player (symbol-for current-player) board)]
+          (let [next-move (get-next-move board current-player)]
             (if (square-already-taken? board next-move)
               (recur board current-player)
               (let [new-board (take-square next-move (symbol-for current-player) board)]
