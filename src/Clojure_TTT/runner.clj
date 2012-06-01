@@ -53,7 +53,7 @@
             (let [next-move (next-move current-player (symbol-for current-player) board)]
               (if (square-already-taken? board next-move)
                 (recur board current-player)
-                (let [new-board (take-square next-move {:board board :player (symbol-for current-player)})]
+                (let [new-board (take-square next-move (symbol-for current-player) board)]
                   (announce-next-move-taken ui (symbol-for current-player) next-move)
                   (recur new-board (next-player)))))))))))
 

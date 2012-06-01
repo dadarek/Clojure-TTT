@@ -30,24 +30,22 @@
 
   (context "Taking squares"
     (it "Appends player to board on correct square"
-      (let [context { :player :x
-                      :board '(:o :x nil
-                               :x :o nil
-                               :x :o nil)}
-            expected-board   '(:o :x :x
-                               :x :o nil
-                               :x :o nil)]
-        (should= expected-board (take-square 3 context))))
+      (let [board          '(:o :x nil
+                             :x :o nil
+                             :x :o nil)
+            expected-board '(:o :x :x
+                             :x :o nil
+                             :x :o nil)]
+        (should= expected-board (take-square 3 :x board))))
 
     (it "Takes into consideration both players"
-      (let [context { :player :o
-                      :board '(:o :x :x
-                               :x :o nil
-                               :x :o nil)}
-            expected-board   '(:o :x :x
-                               :x :o :o
-                               :x :o nil)]
-        (should= expected-board (take-square 6 context)))))
+      (let [board          '(:o :x :x
+                             :x :o nil
+                             :x :o nil)
+            expected-board '(:o :x :x
+                             :x :o :o
+                             :x :o nil)]
+        (should= expected-board (take-square 6 :o board)))))
 
   (context "Empty squares"
     (it "Finds empty squares"

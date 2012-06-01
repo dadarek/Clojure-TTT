@@ -16,8 +16,8 @@
     (list new-value)
     (nthnext l (inc index))))
 
-(defn take-square [square context]
-  (replace-in-list (:board context) (dec square) (:player context)))
+(defn take-square [square player board]
+  (replace-in-list board (dec square) player))
 
 (defn get-empty-squares [board]
   ( let [empty-square? #(nil? (nth board %))

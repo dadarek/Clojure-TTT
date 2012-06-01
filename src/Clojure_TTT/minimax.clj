@@ -14,7 +14,7 @@
   (do
     (let [current-squares (player-squares board player)
           new-squares (conj current-squares square)
-          new-board (take-square square {:board board :player player})
+          new-board (take-square square player board)
           opponent (if (= :x player) :o :x)
           empty-squares (get-empty-squares new-board)
           opponents-score (fn [square] (score opponent square new-board))
