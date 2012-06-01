@@ -34,19 +34,19 @@
   (not= nil (nth board (dec square))))
 
 (defn run [x o ui]
-  (let [symbol-for #(if (= % x) :x :o)]
+  (let [symbol-for #(if (= % x) :x :o)
+        get-next-player #(if (= x %) o x)]
     (loop [board empty-board
            current-player x]
-      (let [next-player #(if (= x current-player) o x)]
-        (if (game-over? board)
-          (complete-game board ui)
-          (do
-            (redraw ui board)
-            (announce-next-turn ui (symbol-for current-player))
-            (let [next-move (next-move current-player (symbol-for current-player) board)]
-              (if (square-already-taken? board next-move)
-                (recur board current-player)
-                (let [new-board (take-square next-move (symbol-for current-player) board)]
-                  (announce-next-move-taken ui (symbol-for current-player) next-move)
-                  (recur new-board (next-player)))))))))))
+      (if (game-over? board)
+        (complete-game board ui)
+        (do
+          (redraw ui board)
+          (announce-next-turn ui (symbol-for current-player))
+          (let [next-move (next-move current-player (symbol-for current-player) board)]
+            (if (square-already-taken? board next-move)
+              (recur board current-player)
+              (let [new-board (take-square next-move (symbol-for current-player) board)]
+                (announce-next-move-taken ui (symbol-for current-player) next-move)
+                (recur new-board (get-next-player current-player))))))))))
 
