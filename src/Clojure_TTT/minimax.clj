@@ -25,9 +25,6 @@
         :else (- (opponents-best)))))
   )
 
-(defn is-empty? [board]
-  (= 9 (count (get-empty-squares board))))
-
 (defn next-move [player board]
   (if (is-empty? board)
     1

@@ -30,3 +30,6 @@
 (defn full? [board]
   (= 0 (count (get-empty-squares board))))
 
+(defn is-empty? [board]
+  (= 9 (count (get-empty-squares board))))
+
