@@ -23,19 +23,12 @@
       (winner? (player-squares board :o))))
 
 (defn complete-game [board ui]
+  (redraw ui board)
   (cond
-    (full? board) (do
-                    (redraw ui board)
-                    (announce-tie ui)
-                    board)
-    (won? board :x) (do
-                (redraw ui board)
-                (announce-winner ui :x)
-                board)
-    (won? board :o) (do
-                (redraw ui board)
-                (announce-winner ui :o)
-                 board)))
+    (full? board) (announce-tie ui)
+    (won? board :x) (announce-winner ui :x)
+    (won? board :o) (announce-winner ui :o))
+  board)
 
 (defn square-already-taken? [board square]
   (not= nil (nth board (dec square))))
