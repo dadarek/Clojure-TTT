@@ -33,11 +33,13 @@
 (defn square-already-taken? [board square]
   (not= nil (nth board (dec square))))
 
+(defn validate-move [board move]
+  (not (square-already-taken? board move)))
+
 (defn run [x o ui]
   (let [symbol-for #(if (= % x) :x :o)
         get-next-player #(if (= x %) o x)
         get-next-move (fn [board player] (next-move player (symbol-for player) board))
-        validate-move (fn [board move] (not (square-already-taken? board move)))
         make-move (fn [board move player] (take-square move (symbol-for player) board)) ]
     (loop [board empty-board
            current-player x]
