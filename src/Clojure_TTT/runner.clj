@@ -14,27 +14,39 @@
 
 (def empty-board '(nil nil nil nil nil nil nil nil nil))
 
+(defn won? [board player]
+  (winner? (player-squares board player)))
+
+(defn game-over? [board]
+  (or (full? board)
+      (winner? (player-squares board :x))
+      (winner? (player-squares board :o))))
+
+(defn complete-game [board ui]
+  (cond
+    (full? board) (do
+                    (redraw ui board)
+                    (announce-tie ui)
+                    board)
+    (won? board :x) (do
+                (redraw ui board)
+                (announce-winner ui :x)
+                board)
+    (won? board :o) (do
+                (redraw ui board)
+                (announce-winner ui :o)
+                 board)))
+
+
 (defn run [x o ui]
   (let [symbol-for #(if (= % x) :x :o)]
     (loop [board empty-board
            current-player x]
-      (let [won? #(winner? (player-squares board %))
-            square-taken? #(not= nil (nth board (dec %)))
+      (let [square-taken? #(not= nil (nth board (dec %)))
             next-player #(if (= x current-player) o x)]
-        (cond
-          (full? board) (do
-                          (redraw ui board)
-                          (announce-tie ui)
-                          board)
-          (won? :x) (do
-                      (redraw ui board)
-                      (announce-winner ui :x)
-                      board)
-          (won? :o) (do
-                      (redraw ui board)
-                      (announce-winner ui :o)
-                       board)
-          :else (do
+        (if (game-over? board)
+          (complete-game board ui)
+          (do
             (redraw ui board)
             (announce-next-turn ui (symbol-for current-player))
             (let [next-move (next-move current-player (symbol-for current-player) board)]
